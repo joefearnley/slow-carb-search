@@ -1,18 +1,17 @@
 <?php
 
 class SearchController extends BaseController {
-  
-
-  public function findSimilarFood($food)
-  {
-    $results = $this->getSearchResults($food);
-    return View::make('home.results', $results);
-  }
 
   public function findFood()
   {
     $foodName = Input::get('food');
     $results = $this->getSearchResults($foodName);
+    return View::make('home.results', $results);
+  }
+
+  public function findSimilarFood($food)
+  {
+    $results = $this->getSearchResults($food);
     return View::make('home.results', $results);
   }
   
