@@ -1,4 +1,4 @@
-@section('content')
+@include('home.header')
 <div class="container">
   
   {{ Form::open(['url' => '/search', 'method' => 'post', 'class' => 'searchform', 'role' => 'form']) }}
@@ -16,5 +16,6 @@
       Did you mean <em><a href="#" id="similarfood">{{ $similar_food }}</a></em>?
     </p>
   @endif
+</div> <!-- /container -->
 
-@endsection
+@include('home.footer')
