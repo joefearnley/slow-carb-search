@@ -2,6 +2,7 @@
 
 return [
   'default' => 'sqlite',
+
   'connections' => [
     'sqlite' => [
       'driver' => 'sqlite',
