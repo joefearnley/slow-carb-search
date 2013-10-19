@@ -10,7 +10,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
     public function setUp()
     {
         parent::setUp();
-        Artisan::call('migrate');
+        $this->setUpDatabase();
     }
 
     /**
@@ -23,6 +23,12 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
         $unitTesting = true;
         $testEnvironment = 'testing';
         return require __DIR__.'/../../bootstrap/start.php';
+    }
+    
+    public function setUpDatabase()
+    {
+        Artisan::call('migrate');
+        Artisan::call('db:seed');
     }
 
 }
