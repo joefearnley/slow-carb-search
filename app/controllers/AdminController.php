@@ -3,16 +3,21 @@
 class AdminController extends \BaseController {
 
     /**
+     * Show links to admin actions.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+       return View::make('admin.admin');
+    }
+
+    /**
      * Check to see if user is logged in and redirect accordingly.
      */
     public function showLogin()
     {
-        // check login
-        if (Auth::check()) {
-            return Redirect::route('admin');
-        } else {
-            $this->layout->content = View::make('admin.login');
-        }
+        return View::make('admin.login');
     }
 
     /**
@@ -45,32 +50,22 @@ class AdminController extends \BaseController {
         return Redirect::to('/admin/login');
     }
 
-    /**
-     * Show links to admin actions.
-     *
-     * @return Response
-     */
-    public function showAdmin()
-    {
-        $this->layout->content = View::make('admin.admin');
-    }
-
     public function listFood()
     {
         $foods = Food::all();
-        $this->layout->content = View::make('admin.listfoods', ['foods' => $foods]);
+        return View::make('admin.listfoods', ['foods' => $foods]);
     }
 
     public function editFood($id)
     {
         $food = Food::find($id);
         $foodGroups = FoodGroup::all();
-        $this->layout->content = View::make('admin.editfood', ['food' => $food, 'foodGroups' => $foodGroups]);
+        return View::make('admin.editfood', ['food' => $food, 'foodGroups' => $foodGroups]);
     }
 
     public function showAddFood()
     {
-        $this->layout->content = View::make('admin.addfood');
+        return View::make('admin.addfood');
     }
 
     public function addFood()
