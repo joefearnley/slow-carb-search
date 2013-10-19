@@ -23,8 +23,8 @@ class SearchController extends BaseController {
 
             if($food['allowed']) {
                 $isIsNot = ' is';
-            } else if(!$food['allowed_moderation'] && $food['allowed_moderation']) {
-                $isIsNot .= ' is not but allowed in moderation.';
+            } else if($food['allowed_moderation']) {
+                $isIsNot .= ' in moderation is';
             }
         } else {
             $isIsNot .= ' is not';
