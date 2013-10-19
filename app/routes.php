@@ -30,7 +30,6 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/search', 'HomeController@index');
 Route::post('/search', 'SearchController@findFood');
-Route::get('/search/{food}', 'SearchController@findSimilarFood');
 
 Route::group(['prefix' => 'api', 'before' => 'auth.basic'], function()
 {

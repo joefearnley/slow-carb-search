@@ -18,10 +18,10 @@ class AdminController extends \BaseController {
     }
 
     /**
-    * Log out user session and show login form.
-    * 
-    * @return Redirect
-    */
+     * Log out user session and show login form.
+     * 
+     * @return Redirect
+     */
     public function login()
     {
         $user = [
@@ -39,8 +39,8 @@ class AdminController extends \BaseController {
     }
 
     /**
-    * Log out user session and show login form.
-    */
+     * Log out user session and show login form.
+     */
     public function logout() 
     {
         Auth::logout();
@@ -48,10 +48,10 @@ class AdminController extends \BaseController {
     }
 
     /**
-    * Show links to admin actions.
-    *
-    * @return Response
-    */
+     * Show links to admin actions.
+     *
+     * @return Response
+     */
     public function showAdmin()
     {
         $this->layout->content = View::make('admin.admin');

@@ -15,34 +15,44 @@ class SearchControllerTest extends TestCase {
     }
 
     /**
-     * Test main form work and returns arguments. In this case they should be empty.
+     * Test submit empty form. No error is display and redirected.
      *
      * @return void
      */
-    public function testFindFood()
+    public function testFindFoodEmptyForm()
     {
         $response = $this->call('POST', '/search');
+
+        $this->assertResponseStatus(302);
+        $this->assertRedirectedTo('/search');
+    }
+    
+    public function testFindFoodWithFoodAllowed()
+    {
+        $food = new Food();
+        $food->name = 'Chicken';
+        $food->description = 'Chicken';
+        $food->allowed = 1;
+        $food->allowed_moderation = 1;
+        $food->food_group_id =  = 'Chicken';
+        $food->createdby 
+        
+        $response = $this->call('POST', '/search');
+
+
 
         $this->assertResponseOk();
         $this->assertViewHas('food_name', '');
         $this->assertViewHas('is_isnot', null);
-    }
-
-    /**
-     * Test finding similar food funtionality.
-     *
-     * @return void
-     */
-    public function testFindSimilarFood()
-    {
-        $this->call('GET', '/search/chicken');
-
-        $this->assertResponseOk();
-        $this->assertViewHas('food_name', 'chicken');
-        $this->assertViewHas('is_isnot', null);
         $this->assertViewHas('similar_food', null);
     }
 
+    public function testFindFoodWithFoodAllowedModeration()
+    {
+    }
     
+    public function testFindFoodWithFoodNotAllowed()
+    {
+    }
 
 }

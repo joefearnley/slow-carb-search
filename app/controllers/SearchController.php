@@ -4,26 +4,18 @@ class SearchController extends BaseController {
 
     public function findFood()
     {
-        $rules = [
-            '' => 'reqquired'
-        ];
-        
         $foodName = Input::get('food');
-        $results = $this->getSearchResults($foodName);
-        return View::make('home.results', $results);
-    }
 
-    public function findSimilarFood($food)
-    {
-        $results = $this->getSearchResults($food);
-        return View::make('home.results', $results);
-    }
+        $validator = Validator::Make(Input::all(), ['food' => 'required']);        
+        if($validator->fails()) {
+            return Redirect::to('/search');
+        }
 
-    protected function getSearchResults($foodName) {
+        $isIsNot = null;
+        $similarFoodName = null;
+
         $parameters = [$foodName];
         $foods = Food::whereRaw('upper(name) = upper(?)', $parameters)->get()->toArray();
-        $isIsNot = '';
-        $similarFoodName = null;
 
         if(!empty($foods)) {
             $food = $foods[0];
@@ -53,7 +45,7 @@ class SearchController extends BaseController {
             'similar_food' => $similarFoodName
         ];
         
-        return $results;
+        return View::make('home.results', $results);
     }
 
 }
