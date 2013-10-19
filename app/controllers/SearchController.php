@@ -4,6 +4,10 @@ class SearchController extends BaseController {
 
     public function findFood()
     {
+        $rules = [
+            '' => 'reqquired'
+        ];
+        
         $foodName = Input::get('food');
         $results = $this->getSearchResults($foodName);
         return View::make('home.results', $results);

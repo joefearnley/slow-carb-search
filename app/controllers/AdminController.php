@@ -44,7 +44,7 @@ class AdminController extends \BaseController {
     public function logout() 
     {
         Auth::logout();
-        $this->layout->content = View::make('admin.login');
+        return Redirect::to('/admin/login');
     }
 
     /**

@@ -10,6 +10,7 @@ class HomeControllerTest extends TestCase {
     public function testIndex()
     {
         $this->call('GET', '/');
+
         $this->assertResponseOk();
     }
 }
