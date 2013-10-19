@@ -2,13 +2,13 @@
 
 class SearchControllerTest extends TestCase {
 
-	/**
-	 * Test /search
-	 *
-	 * @return void
-	 */
-	public function testIndex()
-	{
+  /**
+   * Confirm /search route is working and form is displayed
+   *
+   * @return void
+   */
+  public function testIndex()
+  {
     $this->call('GET', '/search');
     $this->assertResponseOk();
   }
