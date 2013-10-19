@@ -2,8 +2,6 @@
 
 class AdminController extends \BaseController {
 
-    protected $layout = 'admin.master';
-
     /**
      * Check to see if user is logged in and redirect accordingly.
      */

@@ -3,11 +3,11 @@
 class AdminControllerTest extends TestCase {
 
     /**
-     * A basic functional test example.
+     * Test that main login form is shown
      *
      * @return void
      */
-    public function testBasicExample()
+    public function testAdminLoginForm()
     {
     }
 

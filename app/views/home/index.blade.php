@@ -1,4 +1,4 @@
-@include('home.header')
+@include('master.header')
 <div class="container">
     <div class="error">
         {{ $errors->first('food') }}
@@ -9,4 +9,4 @@
     </div>
     {{ Form::close() }}
 </div> <!-- /container -->
-@include('home.footer')
+@include('master.footer')

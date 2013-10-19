@@ -1,4 +1,4 @@
-@section('content')
+@include('master.header')
     @if (Session::has('login_error_message'))
     <div class="row">
         <div class="col-md-offset-4 error">
@@ -22,4 +22,4 @@
             </form>
         </div>
     </div>
-@endsection
+@include('master.footer')

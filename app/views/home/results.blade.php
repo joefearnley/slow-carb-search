@@ -1,4 +1,4 @@
-@include('home.header')
+@include('master.header')
 <div class="container">    
     {{ Form::open(['url' => '/search', 'method' => 'post', 'class' => 'searchform', 'role' => 'form']) }}
     <div class="form-group">
@@ -15,4 +15,4 @@
   @endif
 </div> <!-- /container -->
 
-@include('home.footer')
+@include('master.footer')
