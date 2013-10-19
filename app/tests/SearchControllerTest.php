@@ -18,17 +18,18 @@ class SearchControllerTest extends TestCase {
     $response = $this->call('POST', '/search');
 
     $this->assertResponseOk();
-    $this->assertViewHas('is_isnot');
-    $this->assertViewHas('food_name');
+    $this->assertViewHas('food_name', '');
+    $this->assertViewHas('is_isnot', null);
   }
 
   public function testFindSimilarFood()
   {
-    $this->call('GET', '/search/chicken');
+    $this->call('GET', '/search/chick');
     
     $this->assertResponseOk();
-    $this->assertViewHas('food_name');
-    $this->assertViewHas('is_isnot');
-    $this->assertViewHas('similar_food');
+    $this->assertViewHas('food_name', 'chick');
+    $this->assertViewHas('is_isnot', null);
+    $this->assertViewHas('similar_food', null);
   }
+
 }

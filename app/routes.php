@@ -11,13 +11,6 @@
 |
 */
 
-Route::group(['prefix' => 'api', 'before' => 'auth.basic'], function()
-{
-  //Route::resource('food', 'FoodController');
-  Route::get('food/all', 'FoodController@showAll');
-  Route::get('food/search/{food}', 'FoodController@search');
-});
-
 Route::group(['prefix' => 'admin', 'before' => 'auth.admin'], function()
 {
   Route::get('/', 'AdminController@showAdmin');
@@ -38,3 +31,10 @@ Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@index');
 Route::post('/search', 'SearchController@findFood');
 Route::get('/search/{food}', 'SearchController@findSimilarFood');
+
+Route::group(['prefix' => 'api', 'before' => 'auth.basic'], function()
+{
+  //Route::resource('food', 'FoodController');
+  Route::get('food/all', 'FoodController@showAll');
+  Route::get('food/search/{food}', 'FoodController@search');
+});
