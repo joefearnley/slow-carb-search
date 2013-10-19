@@ -15,8 +15,8 @@ class CreateFoodGroupTable extends Migration {
 		Schema::create('food_group', function(Blueprint $table)
 		{
 			$table->increments('id');
-      $table->string('name')->unique();
-      $table->string('description');
+            $table->string('name')->unique();
+            $table->string('description');
 			$table->timestamps();
 		});
 	}

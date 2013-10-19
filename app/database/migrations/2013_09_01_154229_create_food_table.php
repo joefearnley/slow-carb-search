@@ -15,15 +15,14 @@ class CreateFoodTable extends Migration {
 		Schema::create('food', function(Blueprint $table)
 		{
 			$table->increments('id');
-      $table->string('name')->unique();
-      $table->string('description');
-      $table->boolean('allowed');
-      $table->boolean('allowed_moderation');
-      $table->integer('food_group_id');
-      $table->integer('createdby');
+            $table->string('name')->unique();
+            $table->string('description');
+            $table->boolean('allowed');
+            $table->boolean('allowed_moderation');
+            $table->integer('food_group_id');
+            $table->integer('createdby');
 			$table->timestamps();
-      //$table->foreign('food_group_id')->references('id')->on('food_group');
-		});
+        });
 	}
 
 	/**

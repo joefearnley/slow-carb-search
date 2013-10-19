@@ -11,40 +11,40 @@ class FoodController extends \BaseController {
 	{
 		return 'pizza pizza pizza pizza';
 	}
-  
-  public function showAll()
-  {
-    $foods = Food::all();
-
-    $results = [
-      'error' => false,
-      'foods' => $foods,
-      200
-    ];
     
-    return Response::json($results);
-  }
-
-  public function search($foodName)
-  {
-    $parameters = [$foodName];
-    $foods = Food::whereRaw('upper(name) = upper(?)', $parameters)->get()->toArray();
-    $similarFoods = [];
-
-    if(empty($foods)) {
-      $parameters = ['%'.$foodName.'%'];
-      $similarFoods = Food::whereRaw('upper(name) like ?', $parameters)->get()->toArray();
+    public function showAll()
+    {
+        $foods = Food::all();
+        
+        $results = [
+            'error' => false,
+            'foods' => $foods,
+            200
+        ];
+        
+        return Response::json($results);
     }
 
-    $results = [
-      'error' => false,
-      'foods' => $foods,
-      'similar_foods' => $similarFoods,
-      200
-    ];
-
-    return Response::json($results);
-  }
+    public function search($foodName)
+    {
+        $parameters = [$foodName];
+        $foods = Food::whereRaw('upper(name) = upper(?)', $parameters)->get()->toArray();
+        $similarFoods = [];
+        
+        if(empty($foods)) {
+            $parameters = ['%'.$foodName.'%'];
+            $similarFoods = Food::whereRaw('upper(name) like ?', $parameters)->get()->toArray();
+        }
+        
+        $results = [
+            'error' => false,
+            'foods' => $foods,
+            'similar_foods' => $similarFoods,
+            200
+        ];
+        
+        return Response::json($results);
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -75,22 +75,22 @@ class FoodController extends \BaseController {
 	public function show($food)
 	{
     /*
-    $foods = Food::where('name', 'LIKE', '%'.$food.'%')->get();
+        $foods = Food::where('name', 'LIKE', '%'.$food.'%')->get();
   
-    $response = [
-      'error' => false,
-      'allowed' => 
-    ];
+        $response = [
+          'error' => false,
+         'allowed' => 
+        ];
  
-    return Response::json(array(
-        'error' => false,
-        'urls' => $urls->toArray(),
-        200
-    );
+         return Response::json(array(
+            'error' => false,
+            'urls' => $urls->toArray(),
+            200
+        );
     
-    $foods = Food::all();
+        $foods = Food::all();
 	*/
-  }
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
