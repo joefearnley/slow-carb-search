@@ -1,4 +1,4 @@
-@section('content')
+@include('master.header')
     <table class="table">
         <tr>
             <th>ID</th>
@@ -21,4 +21,4 @@
     <div>
         <a href="/admin/food/add">Add Food</a>
     </div>
-@endsection
+@include('master.footer')

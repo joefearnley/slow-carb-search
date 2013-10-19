@@ -1,4 +1,4 @@
-@section('content')
+@include('master.header')
 <form role="form" method="post" action="/admin/food/add">
     <input type="hidden" name="id">
     <div class="form-group">
@@ -27,4 +27,4 @@
     </div>
     <button type="submit" class="btn btn-default">Save</button>
 </form>
-@endsection
+@include('master.footer')
