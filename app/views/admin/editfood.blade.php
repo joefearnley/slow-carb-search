@@ -1,6 +1,6 @@
 @include('master.header')
 <form role="form" method="post" action="/admin/food/save">
-    <input type="hidden" name="id" value="{{ $food->getId() }}">
+    <input type="hidden" name="id" value="{{ $food->id }}">
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="{{ $food->name }}" value="{{ $food->name }}">

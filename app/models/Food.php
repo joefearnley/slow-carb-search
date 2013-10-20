@@ -10,7 +10,7 @@ class Food extends Eloquent {
     protected $table = 'food';
 
     public static $unguarded = true;
-  
+
     public function getFoodGroup()
     {
         return FoodGroup::find($this->food_group_id)->getName();

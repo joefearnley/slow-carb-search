@@ -7,8 +7,8 @@
     <meta name="author" content="Joe Fearnley">
     
     <title>Slow Carb Search</title>
-    <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/spacelab/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -19,4 +19,4 @@
             </div>
         </div>
     </div>
-    <div class="container">
+<div class="container">

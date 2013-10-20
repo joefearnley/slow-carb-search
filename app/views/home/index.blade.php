@@ -1,4 +1,5 @@
 @include('master.header')
+
     <div class="error">
         {{ $errors->first('food') }}
     </div>
@@ -7,4 +8,5 @@
         {{ Form::text('food', '', ['class' => 'form-control input', 'id' => 'food', 'placeholder' => 'Enter Food']) }}
     </div>
     {{ Form::close() }}
+
 @include('master.footer')

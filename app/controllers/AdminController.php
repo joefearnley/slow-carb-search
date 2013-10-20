@@ -9,7 +9,7 @@ class AdminController extends \BaseController {
      */
     public function index()
     {
-       return View::make('admin.admin');
+        return View::make('admin.admin');
     }
 
     /**
@@ -32,7 +32,7 @@ class AdminController extends \BaseController {
             'password' => Input::get('password')
         ];
 
-        if (Auth::attempt($user, true)) {
+        if (Auth::attempt($user)) {
             Session::put('username', $user['username']);
             return Redirect::route('admin');
         } else {
@@ -74,7 +74,7 @@ class AdminController extends \BaseController {
         $description = Input::get('description');
         $allowed = Input::has('allowed') ? true : false;
         $allowedInModeration = Input::has('allowed-in-moderation') ? true : false;
-        
+
         $food = new Food();
         $food->name = $name;
         $food->description = $description;
