@@ -2,6 +2,11 @@
 
 class AdminControllerTest extends TestCase {
 
+    /**
+     * Enable filters for testing auth-protected routes
+     *
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
@@ -9,6 +14,11 @@ class AdminControllerTest extends TestCase {
         Route::enableFilters();
     }
 
+    /**
+     * Test main login page displays OK
+     *
+     * @return void
+     */
     public function testLogin()
     {
         $this->call('GET', '/admin/login');
@@ -16,6 +26,11 @@ class AdminControllerTest extends TestCase {
         $this->assertResponseOk();
     }
 
+    /**
+     * Test logout page redirects properly
+     *
+     * @return void
+     */
     public function testLogout()
     {
         $this->call('GET', '/admin/logout');
@@ -24,6 +39,12 @@ class AdminControllerTest extends TestCase {
         $this->assertRedirectedTo('/admin/login');
     }
     
+    /**
+     * Test routes related to the admin controller that are protected
+     * by the auth.admin filter
+     *
+     * @return void
+     */
     public function testAdminProtectedRoutes()
     {
         $this->call('GET', '/admin');
