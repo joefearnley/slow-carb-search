@@ -41,8 +41,8 @@ Route::filter('auth', function()
 Route::filter('auth.admin', function()
 {
 	if (Auth::guest()) {
-        return Redirect::guest('admin/login')
-            ->with('auth_error', 'You must be logged in to view this page');
+        return Redirect::to('admin/login')
+            ->with('login_error_message', 'You must be logged in to view that page');
     }
 });
 

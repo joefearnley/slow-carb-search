@@ -2,16 +2,11 @@
 
 class AdminControllerTest extends TestCase {
 
-    /**
-     * Test that main login form is shown
-     *
-     * @return void
-     */
-    public function testAdminIndex()
+    public function setUp()
     {
-        $this->call('GET', '/admin');
+        parent::setUp();
 
-        $this->assertResponseOk();   
+        Route::enableFilters();
     }
 
     public function testLogin()
@@ -33,14 +28,28 @@ class AdminControllerTest extends TestCase {
     {
         $this->call('GET', '/admin');
 
-        $this->assertResponseStatus(200);
+        $this->assertResponseStatus(302);
         $this->assertRedirectedTo('admin/login');
+        $this->assertSessionHas('login_error_message');
 
-        $this->call('GET', 'food/list');
-        $this->call('GET', 'food/edit/1');
-        $this->call('POST', 'food/save');
-        $this->call('GET', 'food/add');
-        $this->call('POST', 'food/add');
+
+        $this->call('GET', '/admin/food/list');
+
+        $this->assertResponseStatus(302);
+        $this->assertRedirectedTo('admin/login');
+        $this->assertSessionHas('login_error_message');
+
+        $this->call('GET', '/admin/food/edit/1');
+
+        $this->assertResponseStatus(302);
+        $this->assertRedirectedTo('admin/login');
+        $this->assertSessionHas('login_error_message');
+
+        $this->call('GET', '/admin/food/add');
+
+        $this->assertResponseStatus(302);
+        $this->assertRedirectedTo('admin/login');
+        $this->assertSessionHas('login_error_message');
     }
 
 }

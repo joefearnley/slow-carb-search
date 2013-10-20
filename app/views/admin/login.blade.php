@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-md-offset-4 error">
             {{ Session::get('login_error_message') }}
+            {{ Session::get('auth_error') }}
         </div>
     </div>
     @endif
