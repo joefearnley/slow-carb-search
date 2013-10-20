@@ -12,7 +12,7 @@
             <form role="form" class="form login" action="/admin/login" method="post">
                 <div class="form-group">
                     <label for="Username"></label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="password"></label>
