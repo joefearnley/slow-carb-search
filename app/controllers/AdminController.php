@@ -32,13 +32,13 @@ class AdminController extends \BaseController {
             'password' => Input::get('password')
         ];
 
-        if (Auth::attempt($user)) {
+        if (Auth::attempt($user, true)) {
             Session::put('username', $user['username']);
-            return Redirect::route('admin');
-        } else {
-            $incorrectLoginMessage = 'Incorrect username and password. Please try again.';
-            return Redirect::to('/admin/login')->with('login_error_message', $incorrectLoginMessage); 
+            return Redirect::to('admin');
         }
+        
+        $incorrectLoginMessage = 'Incorrect username and password. Please try again.';
+        return Redirect::to('admin/login')->with('login_error_message', $incorrectLoginMessage); 
     }
 
     /**
@@ -47,7 +47,7 @@ class AdminController extends \BaseController {
     public function logout() 
     {
         Auth::logout();
-        return Redirect::to('/admin/login');
+        return Redirect::to('admin/login');
     }
 
     public function listFood()
@@ -82,7 +82,7 @@ class AdminController extends \BaseController {
         $food->allowed_moderation = $allowedInModeration;
         $food->save();
         
-        return Redirect::to('/admin/food/list')->with('saved_message', 'Added food ' . $food->name); 
+        return Redirect::to('admin/food/list')->with('saved_message', 'Added food ' . $food->name); 
     }
 
     public function saveFood()
@@ -100,7 +100,7 @@ class AdminController extends \BaseController {
         $food->allowed_moderation = $allowedInModeration;
         $food->save();
 
-        return Redirect::to('/admin/food/list')->with('saved_message', $food->name . ' saved'); 
+        return Redirect::to('admin/food/list')->with('saved_message', $food->name . ' saved'); 
     }
 
 }

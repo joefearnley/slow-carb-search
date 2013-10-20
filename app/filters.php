@@ -40,7 +40,10 @@ Route::filter('auth', function()
 
 Route::filter('auth.admin', function()
 {
-	if (Auth::guest()) return Redirect::guest('/admin/login');
+	if (Auth::guest()) {
+        return Redirect::guest('admin/login')
+            ->with('auth_error', 'You must be logged in to view this page');
+    }
 });
 
 Route::filter('auth.basic', function()
