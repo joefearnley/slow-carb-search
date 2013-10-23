@@ -130,22 +130,23 @@ class AdminControllerFunctionalTest extends TestCase {
         $this->assertResponseOk();
 
         $formData = [
-            'id' => 1,
             'name' => 'NewFood',
-            'description' => 'NewFoodDesciption',
-            'allowed' => false,
-            'allowed-in-moderation' => true
+            'description' => 'NewFoodDesrciption',
+            'allowed' => '',
+            'allowed-in-moderation' => 'checked'
         ];
         
         $this->call('POST', '/admin/food/add', $formData);
 
         $this->assertRedirectedTo('admin/food/list');
-     /*
+         
+        $maxId = DB::table('food')->max('id');
+        $food = Food::find($maxId);
+        
         $this->assertEquals($food->name, 'NewFood');
-        $this->assertEquals($food->description, 'NewFoodDescription');
-        $this->assertFalse($food->allowed);
-        $this->assertTrue($food->allowed_moderation);
-    */
+        $this->assertEquals($food->description, 'NewFoodDesrciption');
+        $this->assertEquals($food->allowed, 0);
+        $this->assertEquals($food->allowed_moderation, 1);
     }
     
 }
