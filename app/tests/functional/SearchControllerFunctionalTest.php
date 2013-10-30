@@ -3,8 +3,7 @@
 class SearchControllerFunctionalTest extends TestCase {
 
     /**
-     * Seed database for test - add an allowed food and one in 
-     * moderation.
+     * Seed database for test - add an allowed food and one in moderation.
      *
      * @return void
      */
@@ -33,6 +32,11 @@ class SearchControllerFunctionalTest extends TestCase {
         $food->save();
     }
 
+    /**
+     * Test main search form. 
+     *
+     * @return void
+     */
     public function testFindFoodWithFoodAllowed()
     {
         $formData = ['food' => 'AllowedFood'];
@@ -45,6 +49,11 @@ class SearchControllerFunctionalTest extends TestCase {
         $this->assertViewHas('similar_food', null);
     }
 
+    /**
+     * Test search results return a similar food if input fits the criteria. 
+     *
+     * @return void
+     */
     public function testFindSimilarFood()
     {
         $formData = ['food' => 'Allowed'];
@@ -57,6 +66,11 @@ class SearchControllerFunctionalTest extends TestCase {
         $this->assertViewHas('similar_food', 'AllowedFood');   
     }
 
+    /**
+     * Test main search form for a food that is not allowed.
+     *
+     * @return void
+     */
     public function testFindFoodWithFoodNotAllowed()
     {
         $formData = ['food' => 'MeatLoaf'];
@@ -69,6 +83,11 @@ class SearchControllerFunctionalTest extends TestCase {
         $this->assertViewHas('similar_food', null); 
     }
 
+    /**
+     * Test main search form for a food allowed in moderation.
+     *
+     * @return void
+     */
     public function testFindFoodWithFoodAllowedModeration()
     {
         $formData = ['food' => 'AllowedInModerationFood'];
