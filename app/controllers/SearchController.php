@@ -2,6 +2,8 @@
 
 class SearchController extends BaseController {
 
+    private $foodService;
+
     public function findFood()
     {
         $foodName = Input::get('food');
@@ -10,41 +12,10 @@ class SearchController extends BaseController {
         if($validator->fails()) {
             return Redirect::to('/search');
         }
-
-        $isIsNot = null;
-        $similarFoodName = null;
-
-        $parameters = [$foodName];
-        $foods = Food::whereRaw('upper(name) = upper(?)', $parameters)->get()->toArray();
-
-        if(!empty($foods)) {
-            $food = $foods[0];
-            $foodName = $food['name'];
-
-            if($food['allowed']) {
-                $isIsNot = ' is';
-            } else if($food['allowed_moderation']) {
-                $isIsNot .= ' in moderation is';
-            }
-        } else {
-            $isIsNot .= ' is not';
-            
-            // check for similar food 
-            $parameters = ['%'.$foodName.'%'];
-            $similarFoods = Food::whereRaw('name like ?', $parameters)->get()->toArray();
-            
-            if(!empty($similarFoods)) {
-                $food = $similarFoods[0];
-                $similarFoodName = $food['name'];
-            }
-        }
-
-        $results = [
-            'food_name' => $foodName,
-            'is_isnot' => $isIsNot,
-            'similar_food' => $similarFoodName
-        ];
         
+        $this->foodService = new FoodService();
+        $results = $this->foodService->findFood($foodName);
+
         return View::make('home.results', $results);
     }
 

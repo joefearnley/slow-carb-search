@@ -7,11 +7,11 @@
     {{ Form::close() }}
     
     <div id="results" class="alert alert-info">
-        <strong>{{ $food_name }} </strong> {{ $is_isnot }} allowed on the Slow Carb Diet
+        <strong>{{ $food_name }} </strong> {{ $message }}
     </div>
     
     @if($similar_food != null)
     <p>Did you mean <em><a href="#" id="similarfood">{{ $similar_food }}</a></em>?</p>
-  @endif
+    @endif
 
 @include('master.footer')
