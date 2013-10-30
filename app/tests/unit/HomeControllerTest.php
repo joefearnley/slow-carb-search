@@ -1,7 +1,7 @@
 <?php
 
 class HomeControllerTest extends TestCase {
-  
+
   /**
     * Test main index page is displayed properly:
     *

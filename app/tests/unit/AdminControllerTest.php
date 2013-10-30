@@ -38,7 +38,7 @@ class AdminControllerTest extends TestCase {
         $this->assertResponseStatus(302);
         $this->assertRedirectedTo('/admin/login');
     }
-    
+
     /**
      * Test routes related to the admin controller that are protected
      * by the auth.admin filter
