@@ -62,7 +62,7 @@ class SearchControllerFunctionalTest extends TestCase {
 
         $this->assertResponseOk();
         $this->assertViewHas('food_name', 'Allowed');
-        $this->assertViewHas('is_isnot', ' is not allowed on the Slow Carb Diet');
+        $this->assertViewHas('message', ' is not allowed on the Slow Carb Diet');
         $this->assertViewHas('similar_food', 'AllowedFood');   
     }
 
@@ -79,7 +79,7 @@ class SearchControllerFunctionalTest extends TestCase {
 
         $this->assertResponseOk();
         $this->assertViewHas('food_name', 'MeatLoaf');
-        $this->assertViewHas('is_isnot', ' is not allowed on the Slow Carb Diet');
+        $this->assertViewHas('message', ' is not allowed on the Slow Carb Diet');
         $this->assertViewHas('similar_food', null); 
     }
 
@@ -96,7 +96,7 @@ class SearchControllerFunctionalTest extends TestCase {
 
         $this->assertResponseOk();
         $this->assertViewHas('food_name', 'AllowedInModerationFood');
-        $this->assertViewHas('is_isnot', ' in moderation is allowed on the Slow Carb Diet');
+        $this->assertViewHas('message', ' in moderation is allowed on the Slow Carb Diet');
         $this->assertViewHas('similar_food', null); 
     }
 
