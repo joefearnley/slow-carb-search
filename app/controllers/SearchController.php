@@ -2,19 +2,20 @@
 
 class SearchController extends BaseController {
 
-    private $foodService;
+    protected $foodService;
+
+    public function __construct(FoodService $foodService)
+    {
+        $this->foodService = $foodService;
+    }
 
     public function findFood()
     {
-        $foodName = Input::get('food');
-
-        $validator = Validator::Make(Input::all(), ['food' => 'required']);        
-        if($validator->fails()) {
+        if(Validator::Make(Input::all(), ['food' => 'required'])->fails()) {
             return Redirect::to('/search');
         }
-        
-        $this->foodService = new FoodService();
-        $results = $this->foodService->findFood($foodName);
+
+        $results = $this->foodService->findFood(Input::get('food'));
 
         return View::make('home.results', $results);
     }
