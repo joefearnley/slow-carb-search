@@ -7,11 +7,11 @@
     {{ Form::close() }}
     
     <div id="results" class="alert alert-info">
-        <strong>{{ $food_name }} </strong> {{ $message }}
+        <strong>{{ $food['name'] }} </strong> {{ $message }}
     </div>
     
-    @if($similar_food != null)
-    <p>Did you mean <em><a href="#" id="similarfood">{{ $similar_food }}</a></em>?</p>
+    @if($similarFoodName != null)
+    <p>Did you mean <em><a href="#" id="similarfood">{{ $similarFoodName }}</a></em>?</p>
     @endif
 
 @include('master.footer')

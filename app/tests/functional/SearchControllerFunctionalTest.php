@@ -44,9 +44,9 @@ class SearchControllerFunctionalTest extends TestCase {
         $this->call('POST', '/search', $formData);
 
         $this->assertResponseOk();
-        $this->assertViewHas('food_name', 'AllowedFood');
+        $this->assertViewHas('food');
         $this->assertViewHas('message', ' is allowed on the Slow Carb Diet');
-        $this->assertViewHas('similar_food', null);
+        $this->assertViewHas('similarFoodName', null);
     }
 
     /**
@@ -61,9 +61,9 @@ class SearchControllerFunctionalTest extends TestCase {
         $this->call('POST', '/search', $formData);
 
         $this->assertResponseOk();
-        $this->assertViewHas('food_name', 'Allowed');
+        $this->assertViewHas('food');
         $this->assertViewHas('message', ' is not allowed on the Slow Carb Diet');
-        $this->assertViewHas('similar_food', 'AllowedFood');   
+        $this->assertViewHas('similarFoodName', 'AllowedFood');   
     }
 
     /**
@@ -78,9 +78,9 @@ class SearchControllerFunctionalTest extends TestCase {
         $this->call('POST', '/search', $formData);
 
         $this->assertResponseOk();
-        $this->assertViewHas('food_name', 'MeatLoaf');
+        $this->assertViewHas('food');
         $this->assertViewHas('message', ' is not allowed on the Slow Carb Diet');
-        $this->assertViewHas('similar_food', null); 
+        $this->assertViewHas('similarFoodName', null); 
     }
 
     /**
@@ -95,9 +95,9 @@ class SearchControllerFunctionalTest extends TestCase {
         $this->call('POST', '/search', $formData);
 
         $this->assertResponseOk();
-        $this->assertViewHas('food_name', 'AllowedInModerationFood');
+        $this->assertViewHas('food');
         $this->assertViewHas('message', ' in moderation is allowed on the Slow Carb Diet');
-        $this->assertViewHas('similar_food', null); 
+        $this->assertViewHas('similarFoodName', null); 
     }
 
 }
