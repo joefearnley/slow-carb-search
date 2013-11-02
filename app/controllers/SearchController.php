@@ -2,23 +2,20 @@
 
 class SearchController extends BaseController {
 
-    protected $searchService;
+    protected $foodService;
 
-    public function __construct(SearchService $searchService)
+    public function __construct(FoodService $foodService)
     {
-        $this->searchService = $searchService;
+        $this->foodService = $foodService;
     }
 
     public function search()
-    {
-        if(Validator::Make(Input::all(), ['food' => 'required'])->fails()) {
+    {   
+        if(! Input::get('food')) {
             return Redirect::to('/search');
         }
 
-        $searchResults = $this->searchService->getSearchResults(Input::get('food'));
-
-//        var_dump($searchResults->toArray());
-//        die();
+        $searchResults = $this->foodService->getSearchResults(Input::get('food'));
 
         return View::make('home.results', $searchResults->toArray());
     }

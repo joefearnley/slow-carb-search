@@ -1,12 +1,11 @@
 <?php
 
-class SearchService {
+class FoodService {
 
     private $searchResults;
 
     public function getSearchResults($searchInput)
     {
-        
         $this->searchResults = new SearchResults();
 
         $similarFoodName = null;
@@ -24,7 +23,7 @@ class SearchService {
 
         return $this->searchResults;
     }
-    
+
     public function findSimilarFoodName($searchInput)
     {
         $similarFoodName = null;
