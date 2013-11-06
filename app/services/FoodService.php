@@ -19,6 +19,7 @@ class FoodService {
             $this->searchResults->setSimilarFoodName($this->findSimilarFoodName($searchInput));
         }
 
+        $this->searchResults->setSearchInput($searchInput);
         $this->searchResults->buildMessage();
 
         return $this->searchResults;

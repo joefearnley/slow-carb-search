@@ -20,7 +20,7 @@ class SearchControllerFunctionalTest extends TestCase {
         $food->food_group_id = 4;
         $food->createdby = 1;
         $food->save();
-        
+
         // allowed food in moderation
         $food = new Food();
         $food->name = 'AllowedInModerationFood';
@@ -45,6 +45,7 @@ class SearchControllerFunctionalTest extends TestCase {
 
         $this->assertResponseOk();
         $this->assertViewHas('food');
+        $this->assertViewHas('searchInput', 'AllowedFood');
         $this->assertViewHas('message', ' is allowed on the Slow Carb Diet');
         $this->assertViewHas('similarFoodName', null);
     }
@@ -62,6 +63,7 @@ class SearchControllerFunctionalTest extends TestCase {
 
         $this->assertResponseOk();
         $this->assertViewHas('food');
+        $this->assertViewHas('searchInput', 'Allowed');
         $this->assertViewHas('message', ' is not allowed on the Slow Carb Diet');
         $this->assertViewHas('similarFoodName', 'AllowedFood');   
     }
@@ -79,6 +81,7 @@ class SearchControllerFunctionalTest extends TestCase {
 
         $this->assertResponseOk();
         $this->assertViewHas('food');
+        $this->assertViewHas('searchInput', 'MeatLoaf');
         $this->assertViewHas('message', ' is not allowed on the Slow Carb Diet');
         $this->assertViewHas('similarFoodName', null); 
     }
@@ -96,6 +99,7 @@ class SearchControllerFunctionalTest extends TestCase {
 
         $this->assertResponseOk();
         $this->assertViewHas('food');
+        $this->assertViewHas('searchInput', 'AllowedInModerationFood');
         $this->assertViewHas('message', ' in moderation is allowed on the Slow Carb Diet');
         $this->assertViewHas('similarFoodName', null); 
     }
