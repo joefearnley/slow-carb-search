@@ -1,7 +1,7 @@
 <?php
-    
+
 class SearchResults {
-    
+
     private $food;
     private $message;
     private $similarFoodName;
@@ -10,7 +10,7 @@ class SearchResults {
     {
         $this->food = $food;
     }
-    
+
     public function setSimilarFoodName($similarFoodName)
     {
         $this->similarFoodName = $similarFoodName;
@@ -26,7 +26,7 @@ class SearchResults {
             $this->message .= ' is not allowed on the Slow Carb Diet';
         }
     }
-    
+
     public function toArray()
     {
         return get_object_vars($this);

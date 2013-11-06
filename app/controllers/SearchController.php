@@ -10,8 +10,8 @@ class SearchController extends BaseController {
     }
 
     public function search()
-    {   
-        if(! Input::get('food')) {
+    {
+        if(!Input::get('food')) {
             return Redirect::to('/search');
         }
 

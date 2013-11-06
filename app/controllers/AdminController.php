@@ -36,7 +36,7 @@ class AdminController extends \BaseController {
             Session::put('username', $user['username']);
             return Redirect::to('admin');
         }
-        
+
         $incorrectLoginMessage = 'Incorrect username and password. Please try again.';
         return Redirect::to('admin/login')->with('login_error_message', $incorrectLoginMessage); 
     }
@@ -81,7 +81,7 @@ class AdminController extends \BaseController {
         $food->allowed = $allowed;
         $food->allowed_moderation = $allowedInModeration;
         $food->save();
-        
+
         return Redirect::to('admin/food/list')->with('saved_message', 'Added food ' . $food->name); 
     }
 
@@ -92,7 +92,7 @@ class AdminController extends \BaseController {
         $description = Input::get('description');
         $allowed = Input::has('allowed') ? true : false;
         $allowedInModeration = Input::has('allowed-in-moderation') ? true : false;
-        
+
         $food = Food::find($id);
         $food->name = $name;
         $food->description = $description;
