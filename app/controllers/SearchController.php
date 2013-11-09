@@ -2,6 +2,9 @@
 
 class SearchController extends BaseController {
 
+    /**
+     * @var FoodService
+     */
     protected $foodService;
 
     public function __construct(FoodService $foodService)
@@ -9,6 +12,11 @@ class SearchController extends BaseController {
         $this->foodService = $foodService;
     }
 
+    /**
+     * Search for a food or similar food.
+     *
+     * @return View
+     */
     public function search()
     {
         if(!Input::get('food')) {

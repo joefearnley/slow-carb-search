@@ -2,12 +2,19 @@
 
 class AdminController extends \BaseController {
 
+    /**
+     * @var FoodService
+     */
     protected $foodService;
+
+    /**
+     * @var FoodGroupService
+     */
     protected $foodGroupService;
 
     /**
      * Constructor - set service objects.
-     * 
+     *
      * @param $foodService
      * @param $$foodGroupService
      * @return void
@@ -112,7 +119,6 @@ class AdminController extends \BaseController {
     public function addFood()
     {
         $food = $this->foodService->create(Input::all());
-
         return Redirect::to('admin/food/list')->with('saved_message', 'Added food ' . $food->name); 
     }
 
@@ -123,19 +129,7 @@ class AdminController extends \BaseController {
      */
     public function saveFood()
     {
-        $id = Input::get('id');
-        $name = Input::get('name');
-        $description = Input::get('description');
-        $allowed = Input::has('allowed') ? true : false;
-        $allowedInModeration = Input::has('allowed-in-moderation') ? true : false;
-
-        $food = Food::find($id);
-        $food->name = $name;
-        $food->description = $description;
-        $food->allowed = $allowed;  
-        $food->allowed_moderation = $allowedInModeration;
-        $food->save();
-
+        $food = $this->foodService->update(Input::all());
         return Redirect::to('admin/food/list')->with('saved_message', $food->name . ' saved'); 
     }
 
