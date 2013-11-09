@@ -11,25 +11,8 @@ class SearchControllerFunctionalTest extends TestCase {
     {
         parent::setUp();
 
-        // allowed food
-        $food = new Food();
-        $food->name = 'AllowedFood';
-        $food->description = 'AllowedFood';
-        $food->allowed = true;
-        $food->allowed_moderation = true;
-        $food->food_group_id = 4;
-        $food->createdby = 1;
-        $food->save();
-
-        // allowed food in moderation
-        $food = new Food();
-        $food->name = 'AllowedInModerationFood';
-        $food->description = 'AllowedInModerationFood';
-        $food->allowed = false;
-        $food->allowed_moderation = true;
-        $food->food_group_id = 4;
-        $food->createdby = 1;
-        $food->save();
+        parent::insertFood();
+        parent::insertFoodInModeration();
     }
 
     /**

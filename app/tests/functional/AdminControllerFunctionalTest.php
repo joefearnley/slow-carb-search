@@ -12,25 +12,8 @@ class AdminControllerFunctionalTest extends TestCase {
     {
         parent::setUp();
 
-        // allowed food
-        $food = new Food();
-        $food->name = 'AllowedFood';
-        $food->description = 'AllowedFood';
-        $food->allowed = true;
-        $food->allowed_moderation = true;
-        $food->food_group_id = 4;
-        $food->createdby = 1;
-        $food->save();
-        
-        // allowed food in moderation
-        $food = new Food();
-        $food->name = 'AllowedInModerationFood';
-        $food->description = 'AllowedInModerationFood';
-        $food->allowed = false;
-        $food->allowed_moderation = true;
-        $food->food_group_id = 4;
-        $food->createdby = 1;
-        $food->save();
+        parent::insertFood();
+        parent::insertFoodInModeration();
     }
 
     /**
@@ -72,7 +55,7 @@ class AdminControllerFunctionalTest extends TestCase {
         $this->assertRedirectedTo('admin/login');
         $this->assertSessionHas('login_error_message');
     }
-    
+
     /**
      * Test that foods are list on page.
      * 
@@ -81,7 +64,7 @@ class AdminControllerFunctionalTest extends TestCase {
     public function testFoodsAreListedOnPage()
     {
         $this->call('GET', '/admin/food/list');
-        
+
         $this->assertResponseOk();
         $this->AssertViewHas('foods');
     }
@@ -95,11 +78,11 @@ class AdminControllerFunctionalTest extends TestCase {
     public function testEditAndSaveFood()
     {
         $this->call('GET', '/admin/food/edit/1');
-        
+
         $this->assertResponseOk();
         $this->AssertViewHas('food');
         $this->AssertViewHas('foodGroups');
-        
+
         $formData = [
             'id' => 1,
             'name' => 'AllowedFoodChanged',
@@ -107,7 +90,7 @@ class AdminControllerFunctionalTest extends TestCase {
             'allowed' => true,
             'allowed-in-moderation' => true
         ];
-        
+
         $this->call('POST', '/admin/food/save', $formData);
 
         $this->assertRedirectedTo('admin/food/list');
@@ -117,7 +100,7 @@ class AdminControllerFunctionalTest extends TestCase {
         $this->assertEquals($food->name, 'AllowedFoodChanged');
         $this->assertEquals($food->description, 'AllowedFoodChangedDescription');
     }
-    
+
     /**
      * Add food record and confirm data stored in the database correctly.
      * 
@@ -126,7 +109,7 @@ class AdminControllerFunctionalTest extends TestCase {
     public function testAddFood()
     {
         $this->call('GET', '/admin/food/add');
-        
+
         $this->assertResponseOk();
 
         $formData = [
@@ -135,18 +118,18 @@ class AdminControllerFunctionalTest extends TestCase {
             'allowed' => '',
             'allowed-in-moderation' => 'checked'
         ];
-        
+
         $this->call('POST', '/admin/food/add', $formData);
 
         $this->assertRedirectedTo('admin/food/list');
-         
+
         $maxId = DB::table('food')->max('id');
         $food = Food::find($maxId);
-        
+
         $this->assertEquals($food->name, 'NewFood');
         $this->assertEquals($food->description, 'NewFoodDesrciption');
         $this->assertEquals($food->allowed, 0);
         $this->assertEquals($food->allowed_moderation, 1);
     }
-    
+
 }
