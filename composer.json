@@ -14,8 +14,8 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php",
-            "app/services",
-            "app/utilities"
+      "app/services",
+      "app/utilities"
 		]
 	},
 	"scripts": {

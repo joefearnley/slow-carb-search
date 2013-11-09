@@ -36,4 +36,32 @@ class FoodService {
 
         return $similarFoodName;
     }
+
+    public function findAll()
+    {
+        return Food::all();
+    }
+
+    public function find($id)
+    {
+        return Food::find($id);
+    }
+
+    public function create($input)
+    {
+        $name = $input['name'];
+        $description = $input['description'];
+        $allowed = $input['allowed'] ? true : false;
+        $allowedInModeration = $input['allowed-in-moderation'] ? true : false;
+
+        $food = isset($input['id']) ? Food::find($input['id']) : new Food();
+
+        $food->name = $name;
+        $food->description = $description;
+        $food->allowed = $allowed;
+        $food->allowed_moderation = $allowedInModeration;
+        $food->save();
+
+        return $food;
+    }
 }
