@@ -1,6 +1,7 @@
 ## Slow Carb Search
 
-A simple way to find what foods are allowed on the Slow Carb Diet. 
+A simple way to find what foods are allowed on the [Slow Carb
+Diet](http://en.wikipedia.org/wiki/Slow-Carb_Diet). 
 
 Check it out at http://162.243.26.131/.
 
