@@ -7,6 +7,12 @@ class SearchController extends BaseController {
      */
     protected $foodService;
 
+    /**
+     * Search for a food or similar food.
+     *
+     * @param object $foodService
+     * @return void
+     */
     public function __construct(FoodService $foodService)
     {
         $this->foodService = $foodService;
@@ -23,9 +29,22 @@ class SearchController extends BaseController {
             return Redirect::to('/search');
         }
 
-        $searchResults = $this->foodService->getSearchResults(Input::get('food'));
+        $results = $this->foodService->getSearchResults(Input::get('food'));
 
-        return View::make('home.results', $searchResults->toArray());
+        return View::make('home.results', $results->toArray());
+    }
+
+    /**
+     * Search for a food by parameter.
+     *
+     * @param string $foodName
+     * @return Response
+     */
+    public function searchByFoodName($foodName)
+    {
+        $results = $this->foodService->getSearchResults($foodName);
+
+        return Response::json($results->toArray());
     }
 
 }
