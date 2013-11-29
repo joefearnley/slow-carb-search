@@ -3,6 +3,19 @@
 class ApiTest extends TestCase {
 
     /**
+     * Seed database for test - add an allowed food and one in moderation.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        parent::insertFood();
+        parent::insertFoodInModeration();
+    }
+
+    /**
      * Test search api endpoint.
      *
      * @return void
@@ -44,16 +57,14 @@ class ApiTest extends TestCase {
 
         $this->assertResponseOk();
 
-        $results = json_decode($response->getContent());
+        $result = json_decode($response->getContent());  // ?? toJson() or anothe utility in Laravel
 
-        var_dump($results);
-        die();
+        $allowed = (bool) $result->food->allowed;
+        $this->assertTrue($allowed );
 
-        $this->assertTrue($results->food->allowed);
-
-        $this->assertEquals('AllowedFood', $results->searchInput);
-        $this->assertEquals(' is allowed on the Slow Carb Diet', $results->message);
-        $this->assertNull($results->similarFoodName);
+        $this->assertEquals('AllowedFood', $result->searchInput);
+        $this->assertEquals(' is allowed on the Slow Carb Diet', $result->message);
+        $this->assertNull($result->similarFoodName);
     }
 
 
