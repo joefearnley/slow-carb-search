@@ -5,7 +5,7 @@ class FoodGroupTableSeeder extends Seeder {
     public function run()
     {
         DB::table('food_group')->delete();
-    
+
         FoodGroup::create([
             'name' => 'Fruits',
             'description' => 'Focus on Fruits'

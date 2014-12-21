@@ -19,8 +19,8 @@ class CreateFoodTable extends Migration {
             $table->string('description');
             $table->boolean('allowed');
             $table->boolean('allowed_moderation');
-            $table->integer('food_group_id')->nullable();
-            $table->integer('createdby')->default(1);
+            $table->integer('food_group_id');
+            $table->integer('createdby');
 			$table->timestamps();
         });
 	}

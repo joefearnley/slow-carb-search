@@ -2,7 +2,7 @@
  
 class FoodTableSeeder extends Seeder {
 
-public function run()
+    public function run()
     {
         DB::table('food')->delete();
 
@@ -50,5 +50,5 @@ public function run()
             'food_group_id' => 4,
             'createdby' => 1
         ]);
-}
+    }
 }

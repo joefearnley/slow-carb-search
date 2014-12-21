@@ -35,16 +35,16 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest())
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		return Redirect::guest('login');
+	}
 });
 
-Route::filter('auth.admin', function()
-{
-	if (Auth::guest()) {
-        return Redirect::to('admin/login')
-            ->with('login_error_message', 'You must be logged in to view that page');
-    }
-});
 
 Route::filter('auth.basic', function()
 {
@@ -80,7 +80,7 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
+	if (Session::token() !== Input::get('_token'))
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
