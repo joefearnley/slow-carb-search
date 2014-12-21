@@ -45,10 +45,17 @@ Route::filter('auth', function()
 	}
 });
 
-
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
+});
+
+Route::filter('auth.admin', function()
+{
+	if (Auth::guest()) {
+        return Redirect::to('admin/login')
+            ->with('login_error_message', 'You must be logged in to view that page');
+    }
 });
 
 /*
