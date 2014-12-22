@@ -19,11 +19,12 @@ class FoodService {
 
         $similarFoodName = null;
         $food = null;
-        $parameters = [$searchInput];
-        $foods = Food::whereRaw('upper(name) = upper(?)', $parameters)->get()->toArray();
+        $foods = Food::whereRaw('upper(name) = ? ',  [Str::upper($searchInput)])
+                        ->orderBy('name', 'asc')
+                        ->get();
 
-        if(!empty($foods)) {
-            $this->searchResults->setFood($foods[0]);
+        if(!$foods->isEmpty()) {
+            $this->searchResults->setFood($foods->first());
         } else {
             $this->searchResults->setSimilarFoodName($this->findSimilarFoodName($searchInput));
         }

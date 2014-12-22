@@ -12,8 +12,8 @@ class AdminControllerFunctionalTest extends TestCase {
     {
         parent::setUp();
 
-        parent::insertFood();
-        parent::insertFoodInModeration();
+        //parent::insertFood();
+        //parent::insertFoodInModeration();
     }
 
     /**
@@ -21,7 +21,8 @@ class AdminControllerFunctionalTest extends TestCase {
      * username: scs
      * password: password
      * 
-     * This test should authenticate the user, store the username, and redirect to the main admin page.
+     * This test should authenticate the user, store the username, 
+     * and redirect to the main admin page.
      *
      * @return void
      */

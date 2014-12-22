@@ -11,8 +11,8 @@ class ApiTest extends TestCase {
     {
         parent::setUp();
 
-        parent::insertFood();
-        parent::insertFoodInModeration();
+        //parent::insertFood();
+        //parent::insertFoodInModeration();
     }
 
     /**
