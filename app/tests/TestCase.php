@@ -19,7 +19,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
      *
      * @return void
      */
-    public function setUpDatabase()
+    public function setUp()
     {
         Artisan::call('migrate');
         Artisan::call('db:seed');

@@ -11,8 +11,8 @@ class ApiTest extends TestCase {
     {
         parent::setUp();
 
-        //parent::insertFood();
-        //parent::insertFoodInModeration();
+        parent::insertFood();
+        parent::insertFoodInModeration();
     }
 
     /**
@@ -60,7 +60,7 @@ class ApiTest extends TestCase {
         $result = json_decode($response->getContent());  // ?? toJson() or anothe utility in Laravel
 
         $allowed = (bool) $result->food->allowed;
-        $this->assertTrue($allowed );
+        $this->assertTrue($allowed);
 
         $this->assertEquals('AllowedFood', $result->searchInput);
         $this->assertEquals(' is allowed on the Slow Carb Diet', $result->message);

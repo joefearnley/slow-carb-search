@@ -2,14 +2,22 @@
 <form role="form" method="post" action="/admin/food/add">
     <input type="hidden" name="id">
     <div class="form-group">
-        <label for="exampleInputEmail1">Name</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Food">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" id="name" name="name" placeholder="Food">
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Description</label>
-        <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+        <label for="description">Description</label>
+        <input type="text" id="description" class="form-control" id="description" name="description" placeholder="Description">
     </div>
-    
+    <div class="form-group">
+        <label for="food-group">Food Group</label>                
+        <select class="form-control" name="food-group">
+            <option value="">Choose a Food Group</option>
+            @foreach ($foodGroups as $foodGroup)
+                <option value="{{ $foodGroup->id }}">{{ $foodGroup->name }}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="form-group">
         <div class="checkbox">
             <label>
@@ -17,7 +25,6 @@
             </label>
         </div>
     </div>
-    
     <div class="form-group">
         <div class="checkbox">
             <label>

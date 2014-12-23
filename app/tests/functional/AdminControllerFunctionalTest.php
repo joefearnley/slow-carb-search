@@ -12,8 +12,8 @@ class AdminControllerFunctionalTest extends TestCase {
     {
         parent::setUp();
 
-        //parent::insertFood();
-        //parent::insertFoodInModeration();
+        parent::insertFood();
+        parent::insertFoodInModeration();
     }
 
     /**
@@ -88,6 +88,7 @@ class AdminControllerFunctionalTest extends TestCase {
             'id' => 1,
             'name' => 'AllowedFoodChanged',
             'description' => 'AllowedFoodChangedDescription',
+            'food-group' => 1,
             'allowed' => true,
             'allowed-in-moderation' => true
         ];
@@ -115,7 +116,8 @@ class AdminControllerFunctionalTest extends TestCase {
 
         $formData = [
             'name' => 'NewFood',
-            'description' => 'NewFoodDesrciption',
+            'description' => 'NewFoodDescription',
+            'food-group' => 1,
             'allowed' => '',
             'allowed-in-moderation' => 'checked'
         ];
@@ -128,7 +130,7 @@ class AdminControllerFunctionalTest extends TestCase {
         $food = Food::find($maxId);
 
         $this->assertEquals($food->name, 'NewFood');
-        $this->assertEquals($food->description, 'NewFoodDesrciption');
+        $this->assertEquals($food->description, 'NewFoodDescription');
         $this->assertEquals($food->allowed, 0);
         $this->assertEquals($food->allowed_moderation, 1);
     }

@@ -109,6 +109,7 @@ class FoodService {
     {
         $name = $input['name'];
         $description = $input['description'];
+        $foodGroupId = $input['food-group'];
         $allowed = $input['allowed'] ? true : false;
         $allowedInModeration = $input['allowed-in-moderation'] ? true : false;
 
@@ -116,6 +117,7 @@ class FoodService {
         $food->description = $description;
         $food->allowed = $allowed;
         $food->allowed_moderation = $allowedInModeration;
+        $food->food_group_id = $foodGroupId;
         $food->save();
 
         return $food;

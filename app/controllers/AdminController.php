@@ -108,7 +108,8 @@ class AdminController extends \BaseController {
      */
     public function showAddFood()
     {
-        return View::make('admin.addfood');
+        $foodGroups = $this->foodGroupService->findAll();
+        return View::make('admin.addfood')->with('foodGroups', $foodGroups);
     }
 
     /**
