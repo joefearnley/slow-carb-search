@@ -119,7 +119,8 @@ class AdminControllerFunctionalTest extends TestCase {
             'description' => 'NewFoodDescription',
             'food-group' => 1,
             'allowed' => '',
-            'allowed-in-moderation' => 'checked'
+            'allowed-in-moderation' => 'checked',
+            'createdby' => 1
         ];
 
         $this->call('POST', '/admin/food/add', $formData);

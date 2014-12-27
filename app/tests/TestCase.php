@@ -1,5 +1,7 @@
 <?php
 
+//use Illuminate\Support\Facades\Artisan as Artisan;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
     /**
@@ -21,6 +23,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
      */
     public function setUp()
     {
+        parent::setUp();
+        
         Artisan::call('migrate');
         Artisan::call('db:seed');
     }
