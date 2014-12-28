@@ -23,7 +23,8 @@ class FoodService {
                         ->orderBy('name', 'asc')
                         ->get();
 
-        if(!$foods->isEmpty()) {
+        if(!$foods->isEmpty())
+        {
             $this->searchResults->setFood($foods->first());
         } else {
             $this->searchResults->setSimilarFoodName($this->findSimilarFoodName($searchInput));
@@ -43,14 +44,14 @@ class FoodService {
      */
     public function findSimilarFoodName($searchInput)
     {
-        $similarFoodName = null;
-        $similarFoods = Food::where('name', 'like', "%$searchInput%")->get()->toArray();
+        $similarFoods = Food::where('name', 'like', "%$searchInput%")->get();
 
-        if(!empty($similarFoods)) {
-            $similarFoodName = $similarFoods[0]['name'];
+        if(!$similarFoods->isEmpty()) {
+            $food = $similarFoods->first();
+            return $food->name;
         }
 
-        return $similarFoodName;
+        return null;
     }
 
     /**
@@ -118,6 +119,7 @@ class FoodService {
         $food->allowed = $allowed;
         $food->allowed_moderation = $allowedInModeration;
         $food->food_group_id = $foodGroupId;
+        $food->createdby = !empty(Auth::user()) ? Auth::user()->id : 1;
         $food->save();
 
         return $food;

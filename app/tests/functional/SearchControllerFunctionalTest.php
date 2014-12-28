@@ -24,13 +24,17 @@ class SearchControllerFunctionalTest extends TestCase {
     {
         $formData = ['food' => 'AllowedFood'];
 
-        $this->call('POST', '/search', $formData);
+        $response = $this->call('POST', '/search', $formData);
 
         $this->assertResponseOk();
-        $this->assertViewHas('food');
-        $this->assertViewHas('searchInput', 'AllowedFood');
-        $this->assertViewHas('message', ' is allowed on the Slow Carb Diet');
-        $this->assertViewHas('similarFoodName', null);
+
+        $this->assertViewHas('results');
+
+        $results = $response->original->getData()['results'];
+
+        $this->assertEquals($results->getSearchInput(), 'AllowedFood');
+        $this->assertEquals($results->getMessage(), ' is allowed on the Slow Carb Diet');
+        $this->assertEquals($results->getSimilarFoodName(), null);
     }
 
     /**
@@ -42,13 +46,17 @@ class SearchControllerFunctionalTest extends TestCase {
     {
         $formData = ['food' => 'Allowed'];
 
-        $this->call('POST', '/search', $formData);
+        $response = $this->call('POST', '/search', $formData);
 
         $this->assertResponseOk();
-        $this->assertViewHas('food');
-        $this->assertViewHas('searchInput', 'Allowed');
-        $this->assertViewHas('message', ' is not allowed on the Slow Carb Diet');
-        //$this->assertViewHas('similarFoodName', 'AllowedFood');
+
+        $this->assertViewHas('results');
+
+        $results = $response->original->getData()['results'];
+
+        $this->assertEquals($results->getSearchInput(), 'Allowed');
+        $this->assertEquals($results->getMessage(), ' is not allowed on the Slow Carb Diet');
+        $this->assertEquals($results->getSimilarFoodName(), 'AllowedFood');
     }
 
     /**
@@ -60,13 +68,17 @@ class SearchControllerFunctionalTest extends TestCase {
     {
         $formData = ['food' => 'MeatLoaf'];
 
-        $this->call('POST', '/search', $formData);
+        $response = $this->call('POST', '/search', $formData);
 
         $this->assertResponseOk();
-        $this->assertViewHas('food');
-        $this->assertViewHas('searchInput', 'MeatLoaf');
-        $this->assertViewHas('message', ' is not allowed on the Slow Carb Diet');
-        $this->assertViewHas('similarFoodName', null); 
+
+        $this->assertViewHas('results');
+
+        $results = $response->original->getData()['results'];
+
+        $this->assertEquals($results->getSearchInput(), 'MeatLoaf');
+        $this->assertEquals($results->getMessage(), ' is not allowed on the Slow Carb Diet');
+        $this->assertEquals($results->getSimilarFoodName(), null);
     }
 
     /**
@@ -80,11 +92,17 @@ class SearchControllerFunctionalTest extends TestCase {
 
         $this->call('POST', '/search', $formData);
 
+        $response = $this->call('POST', '/search', $formData);
+
         $this->assertResponseOk();
-        $this->assertViewHas('food');
-        $this->assertViewHas('searchInput', 'AllowedInModerationFood');
-        $this->assertViewHas('message', ' in moderation is allowed on the Slow Carb Diet');
-        $this->assertViewHas('similarFoodName', null); 
+
+        $this->assertViewHas('results');
+
+        $results = $response->original->getData()['results'];
+
+        $this->assertEquals($results->getSearchInput(), 'AllowedInModerationFood');
+        $this->assertEquals($results->getMessage(), ' in moderation is allowed on the Slow Carb Diet');
+        $this->assertEquals($results->getSimilarFoodName(), null);
     }
 
 }

@@ -12,14 +12,29 @@ class SearchResults {
         $this->food = $food;
     }
 
+    public function getFood()
+    {
+        return $this->food;
+    }
+
     public function setSearchInput($searchInput)
     {
       $this->searchInput = $searchInput;
     }
 
+    public function getSearchInput()
+    {
+      return $this->searchInput;
+    }    
+
     public function setSimilarFoodName($similarFoodName)
     {
         $this->similarFoodName = $similarFoodName;
+    }
+
+    public function getSimilarFoodName()
+    {
+        return $this->similarFoodName;
     }
 
     public function buildMessage()
@@ -31,6 +46,11 @@ class SearchResults {
         } else {
             $this->message = ' is not allowed on the Slow Carb Diet';
         }
+    }
+
+    public function getMessage()
+    {
+        return $this->message;
     }
 
     public function toArray()

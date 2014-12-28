@@ -25,26 +25,14 @@ class SearchController extends BaseController {
      */
     public function search()
     {
-        if(!Input::get('food')) {
+        if(!Input::has('food')) 
+        {
             return Redirect::to('/search');
         }
 
         $results = $this->foodService->getSearchResults(Input::get('food'));
 
-        return View::make('home.results', $results->toArray());
-    }
-
-    /**
-     * Search for a food by parameter.
-     *
-     * @param string $foodName
-     * @return Response
-     */
-    public function searchByFoodName($foodName)
-    {
-        $results = $this->foodService->getSearchResults($foodName);
-
-        return Response::json($results->toArray());
+        return View::make('home.results')->withResults($results);
     }
 
 }

@@ -22,9 +22,9 @@ class ApiTest extends TestCase {
      * */
     public function testSearch()
     {
-        $this->call('GET', '/api/search/chicken');
+        $response = $this->client->request('GET', '/api/search?food=chicken');
 
-        $this->assertResponseOk();
+        $this->assertTrue($this->client->getResponse()->isOk());
     }
 
     /**
@@ -34,16 +34,15 @@ class ApiTest extends TestCase {
      */
     public function testSearchResultsNoFoodFound()
     {
-        $response = $this->call('GET', '/api/search/chicken');
+        $response = $this->client->request('GET', '/api/search?food=food Not Found');
 
-        $this->assertResponseOk();
+        $this->assertTrue($this->client->getResponse()->isOk());
 
-        $results = json_decode($response->getContent());
-
-        $this->assertNull($results->food);
-        $this->assertEquals('chicken', $results->searchInput);
-        $this->assertEquals(' is not allowed on the Slow Carb Diet', $results->message);
-        $this->assertNull($results->similarFoodName);
+        $input = $response->filterXPath('//*[@id="input"]')->text();
+        $this->assertEquals('food Not Found ', $input);
+        
+        $message = $response->filterXPath('//*[@id="message"]')->text();
+        $this->assertEquals(' is not allowed on the Slow Carb Diet', $message);
     }
 
     /**
@@ -53,19 +52,18 @@ class ApiTest extends TestCase {
      */
     public function testSearchResultsFoodFound()
     {
-        $response = $this->call('GET', '/api/search/AllowedFood');
+        $response = $this->client->request('GET', '/api/search?food=AllowedFood');
 
-        $this->assertResponseOk();
+        $this->assertTrue($this->client->getResponse()->isOk());
 
-        $result = json_decode($response->getContent());  // ?? toJson() or anothe utility in Laravel
+        $input = $response->filterXPath('//*[@id="input"]')->text();
+        $this->assertEquals('AllowedFood ', $input);
 
-        $allowed = (bool) $result->food->allowed;
-        $this->assertTrue($allowed);
+        $message = $response->filterXPath('//*[@id="message"]')->text();
+        $this->assertEquals(' is allowed on the Slow Carb Diet', $message);
 
-        $this->assertEquals('AllowedFood', $result->searchInput);
-        $this->assertEquals(' is allowed on the Slow Carb Diet', $result->message);
-        $this->assertNull($result->similarFoodName);
+        $this->setExpectedException('InvalidArgumentException');
+        $similarFood = $response->filterXPath('//*[@id="similar-food"]')->text();
     }
-
 
 }

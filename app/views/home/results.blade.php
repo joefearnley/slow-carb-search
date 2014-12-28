@@ -7,11 +7,12 @@
     {{ Form::close() }}
 
     <div id="results" class="alert alert-info">
-        <strong>{{ $searchInput }} </strong> {{ $message }}
+        <strong><span id="input">{{ $results->getSearchInput() }} </span></strong> 
+        <span id="message">{{ $results->getMessage() }}</span>
     </div>
 
-    @if($similarFoodName != null)
-    <p>Did you mean <em><a href="#" id="similarfood">{{ $similarFoodName }}</a></em>?</p>
+    @if(!empty($results->getSimilarFoodName()))
+    <p>Did you mean <em><a href="#" id="similar-food">{{ $results->getSimilarFoodName() }}</a></em>?</p>
     @endif
 
 @include('master.footer')

@@ -71,6 +71,7 @@ class AdminControllerFunctionalTest extends TestCase {
     }
 
     /**
+     *
      * Edit food record and confirm data is given to the view. 
      * Save the form and confirm data is stored correctly.
      * 
