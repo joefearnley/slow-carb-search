@@ -4,11 +4,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 col-lg-offset-2">
-                        {{ Form::open(['url' => '/search', 'method' => 'post', 'class' => 'searchform', 'role' => 'form']) }}
-                        <div class="form-group">
-                            {{ Form::text('food', '', ['class' => 'form-control input-large', 'id' => 'food', 'placeholder' => 'Slow Carb Search']) }}
-                        </div>
-                        {{ Form::close() }}
+                        <form id="searchform" class="searchform" role="form">
+                            <div class="form-group">
+                                <input class="form-control input-large" id="food" placeholder="Slow Carb Search" name="food" type="text" value="">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -73,53 +73,4 @@
             </div>
         </div>
     </section>
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4>
-                        <strong>
-                            Start Bootstrap
-                        </strong>
-                    </h4>
-                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
-<script>
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
-    });
-</script>
-</body>
-</html>
+@include('master.footer')

@@ -20,7 +20,4 @@ Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@index');
 Route::post('/search', 'SearchController@search');
 
-Route::group(['prefix' => 'api'], function()
-{
-    Route::get('/search', 'SearchController@search');
-});
+Route::get('/api/search', 'ApiController@search');

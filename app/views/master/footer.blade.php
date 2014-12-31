@@ -15,6 +15,7 @@
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/slowcarbsearch.js"></script>
 
 <script>
     $("#menu-close").click(function(e) {

@@ -28,6 +28,23 @@ class ApiTest extends TestCase {
     }
 
     /**
+     * Test call to the search API with no input which should result in an error.
+     *
+     * @return void
+     */
+    public function testSearchResultsErrorNoInputProvided()
+    {
+        $response = $this->client->request('GET', '/api/search');
+
+        $this->assertTrue($this->client->getResponse()->isOk());
+
+        $data = $this->client->getResponse()->getData();
+
+        $this->assertFalse($data->success);
+        $this->assertEquals('No search input provided.', $data->message);
+    }
+
+    /**
      * Test call to the search API with input with no match on a food.
      *
      * @return void
@@ -38,11 +55,11 @@ class ApiTest extends TestCase {
 
         $this->assertTrue($this->client->getResponse()->isOk());
 
-        $input = $response->filterXPath('//*[@id="input"]')->text();
-        $this->assertEquals('food Not Found ', $input);
-        
-        $message = $response->filterXPath('//*[@id="message"]')->text();
-        $this->assertEquals(' is not allowed on the Slow Carb Diet', $message);
+        $data = $this->client->getResponse()->getData();
+
+        $this->assertTrue($data->success);
+        $this->assertEquals('food Not Found', $data->results->searchInput);
+        $this->assertEquals(' is not allowed on the Slow Carb Diet', $data->results->message);
     }
 
     /**
@@ -56,14 +73,11 @@ class ApiTest extends TestCase {
 
         $this->assertTrue($this->client->getResponse()->isOk());
 
-        $input = $response->filterXPath('//*[@id="input"]')->text();
-        $this->assertEquals('AllowedFood ', $input);
+        $data = $this->client->getResponse()->getData();
 
-        $message = $response->filterXPath('//*[@id="message"]')->text();
-        $this->assertEquals(' is allowed on the Slow Carb Diet', $message);
-
-        $this->setExpectedException('InvalidArgumentException');
-        $similarFood = $response->filterXPath('//*[@id="similar-food"]')->text();
+        $this->assertTrue($data->success);
+        $this->assertEquals('AllowedFood', $data->results->searchInput);
+        $this->assertEquals(' is allowed on the Slow Carb Diet', $data->results->message);
     }
 
 }
