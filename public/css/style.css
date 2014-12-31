@@ -4,11 +4,8 @@ body {
 }
 
 .input-large {
-    height: 60px !important;
-    margin-bottom: 10px !important;
-    line-height: 30px !important;
-    padding: 11px 19px !important;
-    font-size: 30px !important;
+    height: 90px;
+    font-size: 55px;
 }
 
 form.login {
