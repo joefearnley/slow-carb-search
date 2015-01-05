@@ -4,73 +4,38 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 col-lg-offset-2">
-                        <form id="searchform" class="searchform" role="form">
+                        {{ Form::open(['url' => '/', 'method' => 'get', 'class' => 'searchform', 'id' => 'searchform', 'role' => 'form']) }}
                             <div class="form-group">
-                                <input class="form-control input-large" id="food" placeholder="Slow Carb Search" name="food" type="text" value="">
+                                {{ Form::text('food', $input, ['class' => 'form-control input-large', 'id' => 'food', 'placeholder' => 'Slow Carb Search']) }}
                             </div>
-                        </form>
+                        {{ Form::close() }}
                     </div>
                 </div>
+                @if(!empty($results))
+                <div class="row">
+                    <div class="col-lg-9 col-lg-offset-2">
+                        <div class="info">
+                            @if($results->getFood()->allowed)
+                                <strong>
+                                    <span id="input">
+                                        {{ $results->getSearchInput() }}
+                                    </span>
+                                </strong>
+                                is allowed on the Slow Carb Diet
+                            @else
+                                <strong>
+                                    <span id="input">
+                                        {{ $results->getSearchInput() }}
+                                    </span>
+                                </strong> 
+                                is not allowed on the Slow Carb Diet
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </header>
-
-    <section id="services" class="services bg-primary">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Our Services</h2>
-                    <hr class="small">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4><strong>Service Name</strong></h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4><strong>Service Name</strong></h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4><strong>Service Name</strong></h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+@include('master.about')
 @include('master.footer')

@@ -43,36 +43,35 @@ body {
     border-bottom: #000 solid 1px;
 }
 
-.simplebox {
-  outline: none;
-  border: none !important;
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  box-shadow: none !important;
-}
-
 input[type="text"]:focus {   
-  border-color: none;
-  box-shadow: none;
-  outline: 0 none;
+    border-color: none;
+    box-shadow: none;
+    outline: 0 none;
 }
 
 ::-webkit-input-placeholder::before { 
     font-family: fontAwesome;
-    content:'\f002  '; 
+    content:'\f0f5   '; 
 }
 ::-moz-placeholder::before  { 
     font-family: fontAwesome;
-    content:'\f002  '; 
+    content:'\f0f5   ';
 }
 
 :-ms-input-placeholder::before  {
     font-family: fontAwesome;
-    content:'\f002  ';
+    content:'\f0f5   ';
 }
 input:-moz-placeholder::before  {
     font-family: fontAwesome;
-    content:'\f002  ';
+    content:'\f0f5   ';
+}
+
+.info {
+    margin-left: 10px;
+    margin-top: 50px;
+    font-size: 30px;
+    text-align: left;
 }
 
 /* Custom Button Styles */

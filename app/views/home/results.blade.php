@@ -8,7 +8,11 @@
 
     <div id="results" class="alert alert-info">
         <strong><span id="input">{{ $results->getSearchInput() }} </span></strong> 
-        <span id="message">{{ $results->getMessage() }}</span>
+        @if(!empty($results->getSimilarFoodName()))
+            <span id="message"></span>
+        @else
+            <span id="message">{{ $results->getMessage() }}</span>
+        @endif
     </div>
 
     @if(!empty($results->getSimilarFoodName()))

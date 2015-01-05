@@ -15,9 +15,10 @@ Route::get('admin/login', 'AdminController@showLogin');
 Route::post('admin/login', 'AdminController@login');
 Route::get('admin/logout', 'AdminController@logout');
 
-Route::get('/', 'HomeController@index');
+//Route::get('/', 'HomeController@index');
 
-Route::get('/search', 'HomeController@index');
-Route::post('/search', 'SearchController@search');
+//Route::get('/search', 'HomeController@index');
+
+Route::get('/', 'SearchController@search');
 
 Route::get('/api/search', 'ApiController@search');

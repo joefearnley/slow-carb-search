@@ -17,8 +17,6 @@ class FoodService {
     {
         $this->searchResults = new SearchResults();
 
-        $similarFoodName = null;
-        $food = null;
         $foods = Food::whereRaw('upper(name) = ? ',  [Str::upper($searchInput)])
                         ->orderBy('name', 'asc')
                         ->get();
@@ -26,7 +24,9 @@ class FoodService {
         if(!$foods->isEmpty())
         {
             $this->searchResults->setFood($foods->first());
-        } else {
+        } 
+        else 
+        {
             $this->searchResults->setSimilarFoodName($this->findSimilarFoodName($searchInput));
         }
 

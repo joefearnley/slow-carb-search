@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Search for foods allowed on the Slow Carb Diet">
+    <meta name="author" content="Joe Fearnley">
 
     <title>Slow Carb Search</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -27,10 +27,10 @@
                 <i class="fa fa-times"></i>
             </a>
             <li class="sidebar-brand">
-                <a href="#top">Slow Carb Search</a>
+                <a href="/">Slow Carb Search</a>
             </li>
             <li>
-                <a href="#top">Home</a>
+                <a href="/">Home</a>
             </li>
             <li>
                 <a href="#about">About</a>
