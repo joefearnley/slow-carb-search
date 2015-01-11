@@ -52,13 +52,13 @@ class AdminController extends \BaseController {
      */
     public function login()
     {
-        $user = [
+        $credentials = [
             'username' => strtolower(Input::get('username')), 
             'password' => Input::get('password')
         ];
 
-        if (Auth::attempt($user, true)) {
-            Session::put('username', $user['username']);
+        if (Auth::attempt($credentials, true)) {
+            Session::put('username', $credentials['username']);
             return Redirect::to('admin');
         }
 
@@ -98,6 +98,7 @@ class AdminController extends \BaseController {
     {
         $food = $this->foodService->find($id);
         $foodGroups = $this->foodGroupService->findAll();
+
         return View::make('admin.editfood', ['food' => $food, 'foodGroups' => $foodGroups]);
     }
 

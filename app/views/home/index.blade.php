@@ -6,7 +6,7 @@
                     <div class="col-lg-9 col-lg-offset-2">
                         {{ Form::open(['url' => '/', 'method' => 'get', 'class' => 'searchform', 'id' => 'searchform', 'role' => 'form']) }}
                             <div class="form-group">
-                                {{ Form::text('food', $input, ['class' => 'form-control input-large', 'id' => 'food', 'placeholder' => 'Slow Carb Search']) }}
+                                {{ Form::text('food', $input, ['class' => 'form-control input-large input-food', 'id' => 'food', 'placeholder' => 'Slow Carb Search']) }}
                             </div>
                         {{ Form::close() }}
                     </div>
@@ -14,7 +14,7 @@
                 @if(!empty($results))
                 <div class="row">
                     <div class="col-lg-9 col-lg-offset-2">
-                        <div class="info">
+                        <div class="results">
                             @if($results->getFood()->allowed)
                                 <strong>
                                     <span id="input">

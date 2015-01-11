@@ -1,7 +1,7 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
+                <div class="col-md-12 text-center">
                     <h4>
                         <strong>
                             Start Bootstrap
@@ -13,9 +13,9 @@
         </div>
     </footer>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/slowcarbsearch.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/slowcarbsearch.js"></script>
 
 <script>
     $("#menu-close").click(function(e) {

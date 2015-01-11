@@ -1,7 +1,14 @@
 @include('master.header')
 <div class="container">
     <div class="row">
-        <div class="col-12-md">
+        <div class="col-md-offset-2 col-md-10 margin-top">
+            <a href="/admin" class="btn btn-dark">Admin Home</a>
+            <a href="/admin/food/add" class="btn btn-dark">Add Food</a>
+            <a href="/admin/food/list" class="btn btn-dark">List Food</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-10 large-margin-top">
             <form role="form" method="post" action="/admin/food/add">
                 <input type="hidden" name="id">
                 <div class="form-group">
@@ -35,7 +42,8 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default">Save</button>
+                <button type="submit" class="btn btn-dark">Save</button>
+                <button id="cancel-edit" class="btn btn-dark">Cancel</button>
             </form>  
         </div>
     </div>

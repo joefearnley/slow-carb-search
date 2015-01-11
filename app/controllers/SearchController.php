@@ -33,10 +33,6 @@ class SearchController extends BaseController {
             $input =  $results->getSearchInput();
         }
 
-        echo '<pre>';
-        var_dump($results);
-        die();
-
         return View::make('home.index')->withResults($results)->withInput($input);
     }
 

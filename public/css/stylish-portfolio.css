@@ -49,29 +49,44 @@ input[type="text"]:focus {
     outline: 0 none;
 }
 
-::-webkit-input-placeholder::before { 
+.input-food::-webkit-input-placeholder::before { 
     font-family: fontAwesome;
     content:'\f0f5   '; 
 }
-::-moz-placeholder::before  { 
+
+.input-food::-moz-placeholder::before  { 
     font-family: fontAwesome;
     content:'\f0f5   ';
 }
 
-:-ms-input-placeholder::before  {
-    font-family: fontAwesome;
-    content:'\f0f5   ';
-}
-input:-moz-placeholder::before  {
+.input-food:-ms-input-placeholder::before  {
     font-family: fontAwesome;
     content:'\f0f5   ';
 }
 
-.info {
+input.input-food:-moz-placeholder::before  {
+    font-family: fontAwesome;
+    content:'\f0f5   ';
+}
+
+.results {
     margin-left: 10px;
     margin-top: 50px;
     font-size: 30px;
     text-align: left;
+    color: #337ab7;
+}
+
+.margin-top {
+    margin-top: 30px;
+}
+
+.large-margin-top {
+    margin-top: 100px;
+}
+
+.error {
+    margin-top: 100px;
 }
 
 /* Custom Button Styles */
