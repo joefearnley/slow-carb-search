@@ -4,4 +4,4 @@ composer.phar
 composer.lock
 .DS_Store
 CONTRIBUTING.md
-.idea
+.idea/
