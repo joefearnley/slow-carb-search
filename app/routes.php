@@ -19,6 +19,6 @@ Route::get('admin/logout', 'AdminController@logout');
 
 //Route::get('/search', 'HomeController@index');
 
-Route::get('/', 'SearchController@search');
+Route::get('/', 'HomeController@index');
 
 Route::get('/api/search', 'ApiController@search');
