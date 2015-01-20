@@ -52,16 +52,19 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-9 col-lg-offset-2">
-                    <div class="results">
-                        {{#if allowed}}
-                        <strong><span>{{query}}</span></strong> is allowed on the Slow Carb Diet
-                        {{else}}
-                        <strong><span>{{query}}</span></strong> is not allowed on the Slow Carb Diet
-                        {{/if}}
-                    </div>
-                </div>
+        </div>
+    </div>
+</script>
+
+<script  type="text/x-handlebars" data-template-name="results">
+    <div class="row">
+        <div class="col-lg-9 col-lg-offset-2">
+            <div class="results">
+            {{#if allowed}}
+                <strong><span>{{query}}</span></strong> is allowed on the Slow Carb Diet
+            {{else}}
+                <strong><span>{{query}}</span></strong> is not allowed on the Slow Carb Diet
+            {{/if}}
             </div>
         </div>
     </div>
@@ -77,8 +80,6 @@
 
 <script src="/js/lib/bootstrap.min.js"></script>
 <script src="/js/app.js"></script>
-
-<!-- EmberFire -->
 
 <script>
     $("#menu-close").click(function(e) {
