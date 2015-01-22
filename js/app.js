@@ -8,11 +8,11 @@ app.controller('IndexController', ['$scope', '$firebase',
         var foods = sync.$asObject();
 
         $scope.search = function() {
-            var query = this.search.input;
+            var query = angular.uppercase(this.search.input);
             angular.forEach(foods, function(food){
                 if(!angular.isFunction(food)) {
-                    if(angular.uppercase(food.name) == angular.uppercase(query)) {
-
+                    if(angular.uppercase(food.name) == query) {
+                        // food is found...is allowed
                     }
                 }
             });
