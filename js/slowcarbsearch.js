@@ -25,13 +25,34 @@ $(function() {
         }
     });
 
-    $('#similar-food').click(function() {
-        $('#food').val($(this).html());
-        $('.searchform').submit();
+    var foods = [];
+    var firebaseReference = new Firebase('https://slowcarbsearch.firebaseio.com/foods');
+    firebaseReference.on('value', function(snapshot) {
+        foods = snapshot.val();
+    }, function (errorObject) {
+        $('#results').html('The read failed: ' + errorObject.code);
     });
 
-    $('#cancel-edit').click(function(event) {
-        event.preventDefault();
-        window.location = '/admin';
+    $('#search-form').submit(function(e) {
+        e.stopImmediatePropagation();
+
+        var query = $('#query').val();;
+        var template = Handlebars.compile($("#results-details").html());
+        var allowed = false;
+
+        $.each(foods, function(key, food) {
+            if(query.toUpperCase() == food.name.toUpperCase()) {
+                allowed = true;
+                return false;
+            }
+        });
+
+        var data = {
+            allowed: allowed,
+            query: query
+        };
+
+        $('#results').html(template(data));
+        return false;
     });
 });
