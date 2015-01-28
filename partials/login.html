@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head ng-app='slowcarbadmin'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Search for foods allowed on the Slow Carb Diet">
+    <meta name="author" content="Joe Fearnley">
+    <title>Slow Carb Search</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/stylish-portfolio.css" rel="stylesheet">
+    <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand"><a href="/">Slow Carb Search</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+    </ul>
+</nav>
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-5 large-margin-top">
+            <div class="alert alert-danger" role="alert">
+            </div>
+            <form role="form" class="form" action="/admin/login" method="post">
+                <div class="form-group">
+                    <label for="Username"></label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password"></label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-offset-3 col-md-4">
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h4><strong>Slow Carb Search</strong></h4>
+                <p><a href="http://jofearnley.com/slow-carb-search">http://jofearnley.com/slow-carb-search</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="js/lib/backbone-min.js"></script>
+<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/js/slowcarbsearch.js"></script>
+</body>
+</html>
