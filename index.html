@@ -31,10 +31,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-lg-offset-2">
-                    <div class="form-group">
-                        <form id="search-form">
-                            <input type="text" name="query" id="query" class="form-control input-large input-food" placeholder="Slow Carb Search">
-                        </form>
+                    <div id="form-container" class="form-group">
                     </div>
                 </div>
             </div>
@@ -57,16 +54,23 @@
         </div>
     </footer>
 
-    <script id="results-details" type="text/x-handlebars-template">
-        {{#if allowed}}
+    <script id="search-form" type="text/template">
+        <form>
+            <input type="text" name="query" id="query" class="form-control input-large input-food" placeholder="Slow Carb Search">
+        </form>
+    </script>
+    <script id="results-details" type="text/template">
+        <% if(allowed) { %>
             <strong><span>{{query}}</span></strong> is allowed on the Slow Carb Diet
-        {{else}}
+        <% } else {  %>
             <strong><span>{{query}}</span></strong> is not allowed on the Slow Carb Diet
-        {{/if}}
+        <% } %>
     </script>
     <script src="js/libs/jquery.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
-    <script src="js/libs/backbone.min.js"></script>
+    <script src="js/libs/underscrore-min.js"></script>
+    <script src="js/libs/backbone-min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/backbonefire/0.5.1/backbonefire.js"></script>
     <script src="js/libs/bootstrap.min.js"></script>
     <script src="js/slowcarbsearch.js"></script>
     <script src="js/app.js"></script>
