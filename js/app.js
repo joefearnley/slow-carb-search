@@ -1,4 +1,3 @@
-//var app = app || {};
 
 var Food = Backbone.Model.extend({
     defaults: {
@@ -15,19 +14,6 @@ var FoodList = Backbone.Firebase.Collection.extend({
         return this.filter(function(model) {
             return (query.toLowerCase() == model.get('name').toLowerCase());
         })
-    }
-});
-
-var SearchResultsView = Backbone.View.extend({
-    el: $('#results'),
-    template: _.template($('#results-details').html()),
-    initialize: function (model, query) {
-        this.render();
-        console.log(model);
-    },
-    render: function() {
-        this.$el.html(this.template());
-        return this;
     }
 });
 
