@@ -61,9 +61,9 @@
     </script>
     <script id="results-details" type="text/template">
         <% if(allowed) { %>
-            <strong><span>{{query}}</span></strong> is allowed on the Slow Carb Diet
+            <strong><span><%- query %></span></strong> is allowed on the Slow Carb Diet
         <% } else {  %>
-            <strong><span>{{query}}</span></strong> is not allowed on the Slow Carb Diet
+            <strong><span><%- query %></span></strong> is not allowed on the Slow Carb Diet
         <% } %>
     </script>
     <script src="js/libs/jquery.min.js"></script>
