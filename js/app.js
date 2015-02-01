@@ -18,7 +18,7 @@
     });
 
     var SearchView = Backbone.View.extend({
-        el: $('#form-container'),
+        el: $('#content'),
         template: _.template($('#search-form').html()),
         events: {
             'submit form': 'search',
@@ -54,7 +54,7 @@
     });
 
     var LoginView = Backbone.View.extend({
-        el: $('#form-container'),
+        el: $('#content'),
         template: _.template($('#login-form').html()),
         events: {
             'submit form': 'login'
@@ -67,8 +67,8 @@
             return this;
         },
         login: function(event) {
+            event.preventDefault();
             console.log('logging in...');
-
         }
     });
 
