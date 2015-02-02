@@ -1,4 +1,12 @@
-(function(){
+(function() {
+
+    var firebaseRef = new Firebase('https://slowcarbsearch.firebaseio.com');
+
+    var User = Backbone.Model.extend({
+        defaults: {
+        }
+    });
+
     var Food = Backbone.Model.extend({
         defaults: {
             allowed: false,
@@ -6,7 +14,7 @@
         }
     });
 
-    var FoodList = Backbone.Firebase.Collection.extend({
+    var FoodCollection = Backbone.Firebase.Collection.extend({
         model: Food,
         url: 'https://slowcarbsearch.firebaseio.com/foods',
         autoSync: true,
@@ -40,7 +48,7 @@
             }
 
             var query = $('#query').val();
-            var results = foodList.search(query);
+            var results = foods.search(query);
             var allowed = (results.length > 0) ? true : false;
 
             var template = _.template($('#results-details').html());
@@ -57,7 +65,9 @@
         el: $('#content'),
         template: _.template($('#login-form').html()),
         events: {
-            'submit form': 'login'
+            'submit form': 'login',
+            'keyup #username': 'resetMessage',
+            'keyup #password': 'resetMessage'
         },
         initialize: function () {
             this.render();
@@ -66,9 +76,26 @@
             this.$el.html(this.template());
             return this;
         },
+        resetMessage: function () {
+            $('#message').html('').hide();
+        },
         login: function(event) {
             event.preventDefault();
-            console.log('logging in...');
+            this.resetMessage();
+
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+            firebaseRef.authWithPassword({
+                email: username,
+                password: password
+            }, function(error, authData) {
+                if (error) {
+                    $('#message').removeClass('hide').html(error).show();
+                } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                }
+            });
         }
     });
 
@@ -90,8 +117,8 @@
         }
     });
 
-    var foodList = new FoodList();
-    foodList.fetch();
+    var foods = new FoodCollection();
+    foods.fetch();
 
     new Router();
     Backbone.history.start(); // dude why?
