@@ -1,9 +1,19 @@
 (function() {
-
-    var firebaseRef = new Firebase('https://slowcarbsearch.firebaseio.com');
-
     var User = Backbone.Model.extend({
-        defaults: {
+        defaults: {},
+        firebaseRef: new Firebase('https://slowcarbsearch.firebaseio.com'),
+        authenticate: function(username, password) {
+            this.firebaseRef.authWithPassword({
+                email: username,
+                password: password
+            }, function(error, authData) {
+                if (error) {
+                    $('#message').removeClass('hide').html(error).show();
+                    return false;
+                } else {
+                    return new AdminView();
+                }
+            });
         }
     });
 
@@ -64,6 +74,7 @@
     var LoginView = Backbone.View.extend({
         el: $('#content'),
         template: _.template($('#login-form').html()),
+        model: new User(),
         events: {
             'submit form': 'login',
             'keyup #username': 'resetMessage',
@@ -85,24 +96,19 @@
 
             var username = $('#username').val();
             var password = $('#password').val();
+            if(this.model.authenticate(username, password)) {
+                console.log('true');
+            }
 
-            firebaseRef.authWithPassword({
-                email: username,
-                password: password
-            }, function(error, authData) {
-                if (error) {
-                    $('#message').removeClass('hide').html(error).show();
-                } else {
-                    console.log("Authenticated successfully with payload:", authData);
-                }
-            });
+            console.log('false');
+
         }
     });
 
     var Router = Backbone.Router.extend({
         routes: {
             '': 'index',
-            '#/': 'index',
+            //'#/': 'index',
             'login': 'login',
             'admin': 'admin'
         },
@@ -114,6 +120,9 @@
         },
         login: function() {
             new LoginView();
+        },
+        logout: function() {
+
         }
     });
 
