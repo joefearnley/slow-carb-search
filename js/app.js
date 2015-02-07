@@ -10,9 +10,8 @@
                 if (error) {
                     $('#message').removeClass('hide').html(error).show();
                     return false;
-                } else {
-                    return new AdminView();
                 }
+                return true;
             });
         }
     });
@@ -31,7 +30,7 @@
         search: function(query) {
             return this.filter(function(model) {
                 return (query.toLowerCase() == model.get('name').toLowerCase());
-            })
+            });
         }
     });
 
@@ -71,6 +70,18 @@
         }
     });
 
+    var AdminView = Backbone.View.extend({
+        el: $('#content'),
+        template: _.template($('#admin').html()),
+        initialize: function () {
+            this.render();
+        },
+        render: function() {
+            this.$el.html(this.template());
+            return this;
+        }
+    });
+
     var LoginView = Backbone.View.extend({
         el: $('#content'),
         template: _.template($('#login-form').html()),
@@ -97,18 +108,14 @@
             var username = $('#username').val();
             var password = $('#password').val();
             if(this.model.authenticate(username, password)) {
-                console.log('true');
+                Router.navigate('admin', true);
             }
-
-            console.log('false');
-
         }
     });
 
     var Router = Backbone.Router.extend({
         routes: {
             '': 'index',
-            //'#/': 'index',
             'login': 'login',
             'admin': 'admin'
         },
@@ -122,7 +129,6 @@
             new LoginView();
         },
         logout: function() {
-
         }
     });
 
