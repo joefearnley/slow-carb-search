@@ -1,12 +1,14 @@
 (function() {
+    var app = {};
+    app.firebaseRef = new Firebase('https://slowcarbsearch.firebaseio.com');
+
     var User = Backbone.Model.extend({
         defaults: {},
-        firebaseRef: new Firebase('https://slowcarbsearch.firebaseio.com'),
         authenticate: function(username, password) {
-            this.firebaseRef.authWithPassword({
+            app.firebaseRef.authWithPassword({
                 email: username,
                 password: password
-            }, function(error, authData) {
+            }, function(error) {
                 if (error) {
                     $('#message').removeClass('hide').html(error).show();
                     return false;
@@ -104,12 +106,12 @@
         login: function(event) {
             event.preventDefault();
             this.resetMessage();
-
             var username = $('#username').val();
             var password = $('#password').val();
             if(this.model.authenticate(username, password)) {
-                Router.navigate('admin', true);
+                Backbone.history.navigate('admin', true);
             }
+            return this;
         }
     });
 
@@ -117,7 +119,28 @@
         routes: {
             '': 'index',
             'login': 'login',
-            'admin': 'admin'
+            'logout': 'logout',
+            'admin': 'admin',
+            'add': 'add',
+            'list': 'list'
+        },
+        requresAuth : [
+            '#admin',
+            '#add',
+            '#edit',
+            '#list'
+        ],
+        before: function(params, next) {
+            var path = Backbone.history.location.hash;
+            var needsAuth = _.contains(this.requresAuth, path);
+            if(needsAuth) {
+                var authData = app.firebaseRef.getAuth();
+                if(authData === null) {
+                    console.log('redirecting');
+
+                    Backbone.history.navigate('login', { trigger : true });
+                }
+            }
         },
         index: function () {
             new SearchView();
@@ -126,9 +149,13 @@
             new AdminView();
         },
         login: function() {
+            console.log('creating new login view');
+
             new LoginView();
         },
         logout: function() {
+            app.firebaseRef.unauth();
+            Backbone.history.navigate('login', { trigger : true });
         }
     });
 
@@ -136,5 +163,5 @@
     foods.fetch();
 
     new Router();
-    Backbone.history.start(); // dude why?
+    Backbone.history.start(); // nevermind...I see why.
 })();
