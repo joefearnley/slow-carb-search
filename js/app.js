@@ -84,6 +84,18 @@
         }
     });
 
+    var EditFoodView = Backbone.View.extend({
+        el: $('#content'),
+        template: _.template($('#admin').html()),
+        initialize: function () {
+            this.render();
+        },
+        render: function() {
+            this.$el.html(this.template());
+            return this;
+        }
+    });
+
     var LoginView = Backbone.View.extend({
         el: $('#content'),
         template: _.template($('#login-form').html()),
@@ -146,6 +158,8 @@
             new SearchView();
         },
         admin: function () {
+            console.log('creaating new admin view');
+
             new AdminView();
         },
         login: function() {
