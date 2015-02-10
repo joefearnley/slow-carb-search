@@ -99,8 +99,8 @@
                 <div class="col-md-offset-2 col-md-10 margin-top">
                     <div class="row">
                         <div class="col-md-offset-2 col-md-10 margin-top">
-                            <a href="/admin/food/add" class="btn btn-dark">Add Food</a>
-                            <a href="/admin/food/list" class="btn btn-dark">List Food</a>
+                            <a href="/#admin/food/add" class="btn btn-dark">Add Food</a>
+                            <a href="/#admin/food/list" class="btn btn-dark">List Food</a>
                         </div>
                     </div>
                 </div>
@@ -120,13 +120,15 @@
                             <th class="text-center">Allowed</th>
                             <th class="text-center">Allowed In Moderation</th>
                         </tr>
+                        <% _.each(foods, function(food) { %>
                         <tr>
-                            <td><a href="/admin/food/edit/<%- food.id %>"><%- food.id %></a></td>
-                            <td><a href="/admin/food/edit/<%- food.id %>"><%- food.name %></a></td>
+                            <td><a href="/#ladmin/food/edit/<%- food.id %>"><%- food.id %></a></td>
+                            <td><a href="/#admin/food/edit/<%- food.id %>"><%- food.name %></a></td>
                             <td><%- food.description %></td>
                             <td class="text-center"><%- food.allowed %></td>
                             <td class="text-center"><%- food.allowed_in_moderation %></td>
                         </tr>
+                        <% }); %>
                     </table>
                 </div>
             </div>

@@ -12,8 +12,10 @@
                 if (error) {
                     $('#message').removeClass('hide').html(error).show();
                     return false;
+                } else {
+                    new AdminView();
+                    return true;
                 }
-                return true;
             });
         }
     });
@@ -84,6 +86,34 @@
         }
     });
 
+    var ListFoodsView = Backbone.View.extend({
+        el: $('#content'),
+        template: _.template($('#food-list').html()),
+        initialize: function () {
+            this.render();
+        },
+        render: function() {
+            this.collection.fetch();
+            var html = this.template({
+                foods: this.collection.toJSON()
+            });
+            this.$el.html(html);
+            return this;
+        }
+    });
+
+    var AddFoodView = Backbone.View.extend({
+        el: $('#content'),
+        template: _.template($('#add-food').html()),
+        initialize: function () {
+            this.render();
+        },
+        render: function() {
+            this.$el.html(this.template());
+            return this;
+        }
+    });
+
     var EditFoodView = Backbone.View.extend({
         el: $('#content'),
         template: _.template($('#admin').html()),
@@ -120,9 +150,7 @@
             this.resetMessage();
             var username = $('#username').val();
             var password = $('#password').val();
-            if(this.model.authenticate(username, password)) {
-                Backbone.history.navigate('admin', true);
-            }
+            this.model.authenticate(username, password);
             return this;
         }
     });
@@ -133,24 +161,23 @@
             'login': 'login',
             'logout': 'logout',
             'admin': 'admin',
-            'add': 'add',
-            'list': 'list'
+            'admin/food/add': 'add',
+            'admin/food/edit/:id': 'edit',
+            'admin/food/list': 'list'
         },
         requresAuth : [
             '#admin',
-            '#add',
-            '#edit',
-            '#list'
+            '#admin/food/add',
+            '#admin/food/edit',
+            '#admin/food/list'
         ],
-        before: function(params, next) {
+        after: function(params, next) {
             var path = Backbone.history.location.hash;
             var needsAuth = _.contains(this.requresAuth, path);
             if(needsAuth) {
                 var authData = app.firebaseRef.getAuth();
                 if(authData === null) {
-                    console.log('redirecting');
-
-                    Backbone.history.navigate('login', { trigger : true });
+                    Backbone.history.navigate('#login', { trigger : true });
                 }
             }
         },
@@ -158,18 +185,23 @@
             new SearchView();
         },
         admin: function () {
-            console.log('creaating new admin view');
-
             new AdminView();
         },
         login: function() {
-            console.log('creating new login view');
-
             new LoginView();
         },
         logout: function() {
             app.firebaseRef.unauth();
             Backbone.history.navigate('login', { trigger : true });
+        },
+        list: function() {
+            new ListFoodsView({collection: foods});
+        },
+        add: function () {
+            new AddFoodView();
+        },
+        edit: function () {
+            new EditFoodView();
         }
     });
 
@@ -177,5 +209,5 @@
     foods.fetch();
 
     new Router();
-    Backbone.history.start(); // nevermind...I see why.
+    Backbone.history.start();
 })();
