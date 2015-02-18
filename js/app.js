@@ -13,7 +13,7 @@
                     $('#message').removeClass('hide').html(error).show();
                     return false;
                 } else {
-                    new AdminView();
+                    window.location.hash = 'admin/food/list';
                     return true;
                 }
             });
@@ -105,12 +105,36 @@
     var AddFoodView = Backbone.View.extend({
         el: $('#content'),
         template: _.template($('#add-food').html()),
+        events: {
+            'submit form': 'save',
+            'click #cancel-edit': 'cancel'
+        },
         initialize: function () {
             this.render();
         },
         render: function() {
             this.$el.html(this.template());
             return this;
+        },
+        save: function(event) {
+            event.preventDefault();
+            var now = new Date();
+            var date = now.getFullYear() + '-' + now.getMonth()+1 + '-' + now.getDate();
+            var time = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+            var dateTime = date + ' ' + time;
+            var user = app.firebaseRef.getAuth().password.email;
+
+            foods.add({
+                name: $('#name').val(),
+                description: $('#description').val(),
+                allowed_moderation: $('#allowed-in-moderation').is(':checked'),
+                created_at: dateTime,
+                updated_at: dateTime,
+                createdby: user
+            });
+        },
+        cancel: function () {
+            window.location.hash = 'admin/food/list'
         }
     });
 
@@ -177,7 +201,7 @@
             if(needsAuth) {
                 var authData = app.firebaseRef.getAuth();
                 if(authData === null) {
-                    Backbone.history.navigate('#login', { trigger : true });
+                    window.location.hash = 'login';
                 }
             }
         },
@@ -192,7 +216,7 @@
         },
         logout: function() {
             app.firebaseRef.unauth();
-            Backbone.history.navigate('login', { trigger : true });
+            window.location.hash = 'login';
         },
         list: function() {
             new ListFoodsView({collection: foods});
