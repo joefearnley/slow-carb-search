@@ -133,7 +133,8 @@
                 createdby: user
             });
         },
-        cancel: function () {
+        cancel: function (event) {
+            event.preventDefault();
             window.location.hash = 'admin/food/list'
         }
     });

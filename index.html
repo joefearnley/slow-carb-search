@@ -27,9 +27,7 @@
             <li><a href="#services">Services</a></li>
         </ul>
     </nav>
-    <div id="content">
-    </div>
-
+    <div id="content"></div>
     <footer>
         <div class="container">
             <div class="row">
@@ -62,6 +60,7 @@
             </div>
         </div>
     </script>
+
     <script id="results-details" type="text/template">
         <% if(allowed) { %>
             <strong><span><%- query %></span></strong> is allowed on the Slow Carb Diet
@@ -87,10 +86,8 @@
                         <button type="submit" class="btn btn-dark">Submit</button>
                     </form>
                 </div>
-                <div class="col-md-offset-3 col-md-4">
-                </div>
             </div>
-            </div>
+        </div>
     </script>
 
     <script id="admin" type="text/template">
@@ -111,21 +108,27 @@
     <script id="food-list" type="text/template">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-2 col-md-10 large-margin-top">
+                <div class="col-xs-12 large-margin-top align-right margin-bottom">
+                    <a href="/#admin/food/add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Add Food">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a href="/#admin/food/add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Logout">
+                        <i class="fa fa-sign-out"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-10">
                     <table class="table">
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th class="text-center">Allowed</th>
                             <th class="text-center">Allowed In Moderation</th>
                         </tr>
                         <% _.each(foods, function(food) { %>
                         <tr>
-                            <td><a href="/#ladmin/food/edit/<%- food.id %>"><%- food.id %></a></td>
                             <td><a href="/#admin/food/edit/<%- food.id %>"><%- food.name %></a></td>
                             <td><%- food.description %></td>
-                            <td class="text-center"><%- food.allowed %></td>
                             <td class="text-center"><%- food.allowed_in_moderation %></td>
                         </tr>
                         <% }); %>
@@ -156,9 +159,13 @@
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-dark">Save</button>
-                    <button id="cancel-edit" class="btn btn-dark">Cancel</button>
-                </form>
+                        <button type="submit" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Save">
+                            <i class="fa fa-floppy-o"></i>
+                        </button>
+                        <button id="cancel-edit" class="btn btn-dark margin-left" data-toggle="tooltip" data-placement="top" title="Cancel">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </form>
             </div>
         </div>
         </div>
@@ -201,8 +208,8 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-dark">Save</button>
-                        <button id="cancel-edit" class="btn btn-dark">Cancel</button>
+                        <button type="submit" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Save"><i class="fa fa-floppy-o"></i></button>
+                        <button id="cancel-edit" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-floppy-o"></i></button>
                     </form>
                 </div>
             </div>

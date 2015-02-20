@@ -85,6 +85,14 @@ input.input-food:-moz-placeholder::before  {
     margin-top: 100px;
 }
 
+.margin-bottom {
+    margin-bottom: 30px;
+}
+
+.margin-left {
+    margin-left: 10px;
+}
+
 .error {
     margin-top: 100px;
 }
@@ -294,4 +302,8 @@ hr.small {
 
 footer {
     padding: 100px 0px 30px 0px;
+}
+
+.align-right {
+    text-align: right;
 }
