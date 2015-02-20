@@ -1,7 +1,4 @@
 (function() {
-    var app = {};
-    app.firebaseRef = new Firebase('https://slowcarbsearch.firebaseio.com');
-
     var User = Backbone.Model.extend({
         defaults: {},
         authenticate: function(username, password) {
@@ -61,7 +58,7 @@
             }
 
             var query = $('#query').val();
-            var results = foods.search(query);
+            var results = app.foods.search(query);
             var allowed = (results.length > 0) ? true : false;
 
             var template = _.template($('#results-details').html());
@@ -93,9 +90,9 @@
             this.render();
         },
         render: function() {
-            this.collection.fetch();
+            app.foods.fetch();
             var html = this.template({
-                foods: this.collection.toJSON()
+                foods: app.foods.toJSON()
             });
             this.$el.html(html);
             return this;
@@ -106,8 +103,8 @@
         el: $('#content'),
         template: _.template($('#add-food').html()),
         events: {
-            'submit form': 'save',
-            'click #cancel-edit': 'cancel'
+            'submit form#add-food-form': 'addFood',
+            'click #cancel-add': 'cancel'
         },
         initialize: function () {
             this.render();
@@ -116,7 +113,7 @@
             this.$el.html(this.template());
             return this;
         },
-        save: function(event) {
+        addFood: function(event) {
             event.preventDefault();
             var now = new Date();
             var date = now.getFullYear() + '-' + now.getMonth()+1 + '-' + now.getDate();
@@ -124,7 +121,7 @@
             var dateTime = date + ' ' + time;
             var user = app.firebaseRef.getAuth().password.email;
 
-            foods.add({
+            app.foods.add({
                 name: $('#name').val(),
                 description: $('#description').val(),
                 allowed_moderation: $('#allowed-in-moderation').is(':checked'),
@@ -141,13 +138,42 @@
 
     var EditFoodView = Backbone.View.extend({
         el: $('#content'),
-        template: _.template($('#admin').html()),
+        template: _.template($('#edit-food').html()),
+        events: {
+            'submit form#add-food-form': 'saveFood',
+            'click #cancel-add': 'cancel'
+        },
         initialize: function () {
             this.render();
         },
         render: function() {
-            this.$el.html(this.template());
+            // find the food....
+            var html = this.template({
+                foods: app.foods.toJSON()
+            });
+            this.$el.html(html);
             return this;
+        },
+        saveFood: function(event) {
+            event.preventDefault();
+            var now = new Date();
+            var date = now.getFullYear() + '-' + now.getMonth()+1 + '-' + now.getDate();
+            var time = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+            var dateTime = date + ' ' + time;
+            var user = app.firebaseRef.getAuth().password.email;
+
+            app.foods.add({
+                name: $('#name').val(),
+                description: $('#description').val(),
+                allowed_moderation: $('#allowed-in-moderation').is(':checked'),
+                created_at: dateTime,
+                updated_at: dateTime,
+                createdby: user
+            });
+        },
+        cancel: function (event) {
+            event.preventDefault();
+            window.location.hash = 'admin/food/list'
         }
     });
 
@@ -220,7 +246,7 @@
             window.location.hash = 'login';
         },
         list: function() {
-            new ListFoodsView({collection: foods});
+            new ListFoodsView();
         },
         add: function () {
             new AddFoodView();
@@ -230,8 +256,11 @@
         }
     });
 
-    var foods = new FoodCollection();
-    foods.fetch();
+    var app = {};
+    app.firebaseRef = new Firebase('https://slowcarbsearch.firebaseio.com');
+
+    app.foods = new FoodCollection();
+    app.foods.fetch();
 
     new Router();
     Backbone.history.start();
