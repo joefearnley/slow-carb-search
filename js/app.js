@@ -147,7 +147,10 @@
             this.render();
         },
         render: function() {
-            // find the food....
+
+            console.log(app.foods);
+
+
             var html = this.template({
                 foods: app.foods.toJSON()
             });
