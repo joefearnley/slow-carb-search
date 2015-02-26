@@ -148,13 +148,16 @@
         },
         render: function() {
 
-            console.log(app.foods);
+            app.foods.fetch();
 
-
-            var html = this.template({
-                foods: app.foods.toJSON()
+            app.foods.each(function(log) {
+                console.log('log item.', log.model);
             });
-            this.$el.html(html);
+            //
+            //var html = this.template({
+            //    foods: app.foods.toJSON()
+            //});
+            //this.$el.html(html);
             return this;
         },
         saveFood: function(event) {
@@ -171,7 +174,7 @@
                 allowed_moderation: $('#allowed-in-moderation').is(':checked'),
                 created_at: dateTime,
                 updated_at: dateTime,
-                createdby: user
+                created_by: user
             });
         },
         cancel: function (event) {
