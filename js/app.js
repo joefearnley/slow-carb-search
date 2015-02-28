@@ -1,10 +1,8 @@
 (function() {
     var Search = {
-        firebaseRef: null,
         firebaseUrl: 'https://slowcarbsearch.firebaseio.com',
-        foods: null,
+        foods: [],
         init: function () {
-            this.firebaseRef = new Firebase(this.firebaseUrl);
             this.fetchFoods();
         },
         fetchFoods: function() {

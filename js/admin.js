@@ -1,17 +1,24 @@
 (function() {
-    var Search = {
+    var Admin = {
         firebaseRef: null,
         firebaseUrl: 'https://slowcarbsearch.firebaseio.com',
-        foods: null,
+        loginFormTemplate: $('#login-form-template'),
+        listTemplate: $('#food-list-template'),
+        loadingListTemplate: $('#loading-list-template'),
+        addFormTemplate: $('#add-form-template'),
+        editFormTemplate: $('#edit-form-template'),
+        el: $('#content'),
         init: function () {
-            this.firebaseRef = new Firebase(this.firebaseUrl);
-            this.fetchFoods();
+            // check for auth
+            this.el.html(this.loginFormTemplate.html());
+            this.bindEvents();
         },
         fetchFoods: function() {
             var self = this;
+            this.el.html(this.loadingListTemplate.html());
             $.get('https://slowcarbsearch.firebaseio.com/foods.json').done(function(response) {
                 self.foods = response;
-                self.showForm();
+                self.showList();
                 self.bindEvents();
             }).fail(function(response) {
                 console.log('Error fetching foods: ' + response.resposeText);
@@ -19,40 +26,52 @@
         },
         bindEvents: function () {
             var self = this;
-            $('#query').on('keyup', this.search);
-            $('form#search-form').on('submit', function (e) {
+            $('form#login-form').on('submit', function(e) {
                 e.preventDefault();
-                self.search();
+                self.login();
             });
         },
-        showForm: function () {
-            var html = $('#search-form-template').html();
-            $('#form').html(html);
-        },
-        search: function() {
-            var query = this.value;
-
-            if(query === '') {
-                $('#results').html('');
-            } else {
-                var allowed = Search.foods.filter(function(food) {
-                    return (query.toLowerCase() == food.name.toLowerCase());
-                });
-
-                if (allowed) {
-                    var context = {
-                        query: query,
-                        allowed: allowed
-                    }
-                    var html = $('#results-template').html();
-                    var template = Handlebars.compile(html);
-                    $('#results').html(template(context));
+        login: function() {
+            var self = this;
+            var ref = new Firebase(this.firebaseUrl);
+            ref.authWithPassword({
+                email: $('#username').val(),
+                password: $('#password').val()
+            }, function(error) {
+                if (error) {
+                    console.log('Login Failed!', error);
+                } else {
+                    self.fetchFoods();
                 }
-            }
+            }, {
+                remember: 'sessionOnly'
+            });
+        },
+        showList: function () {
+            var self = this;
+
+            // load foods from firebase
+            // update html
+            // set click eventsx`   
+
+            self.el.html(self.listTemplate.html());
+
+            //$('#add-food').on('click', function(e) {
+            //    e.preventDefault();
+            //    self.addFood();
+            //});
+
+            //$('#logout').on('click', function(e) {
+            //    e.preventDefault();
+            //    self.logout();
+            //});
+        },
+        logout: function () {
+
         }
     };
 
-    Search.init();
+    Admin.init();
 })();
 
 //    var User = Backbone.Model.extend({

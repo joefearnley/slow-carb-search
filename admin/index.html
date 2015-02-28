@@ -7,9 +7,9 @@
     <meta name="description" content="Search for foods allowed on the Slow Carb Diet">
     <meta name="author" content="Joe Fearnley">
     <title>Slow Carb Search</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -17,7 +17,8 @@
     <![endif]-->
 </head>
 <body>
-<div id="content"></div>
+<div id="content">
+</div>
 <footer>
     <div class="container">
         <div class="row">
@@ -29,46 +30,12 @@
     </div>
 </footer>
 
-<script id="search-form" type="text/template">
-    <div class="text-vertical-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-lg-offset-3">
-                    <div class="form-group">
-                        <form>
-                            <input type="text" name="query" id="query" class="form-control input-large input-food" placeholder="Slow Carb Search">
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg7 col-lg-offset-3">
-                    <div id="results" class="results">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</script>
-
-<script id="results-details" type="text/template">
-    <% if(allowed) { %>
-    <span class="allowed">
-            <strong><span><%- query %></span></strong> is allowed on the Slow Carb Diet
-        </span>
-    <% } else {  %>
-    <span class="not-allowed">
-                <strong><span><%- query %></span></strong> is not allowed on the Slow Carb Diet
-            </span>
-    <% } %>
-</script>
-
-<script id="login-form" type="text/template">
+<script id="login-form-template" type="text/x-handlebars-template">
     <div class="container">
         <div class="row">
             <div class="col-md-offset-4 col-md-5 large-margin-top">
                 <div id="message" class="alert alert-danger hide"></div>
-                <form role="form" class="form" action="/admin/login" method="post">
+                <form role="form" id="login-form" class="form">
                     <div class="form-group">
                         <label for="Username"></label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">
@@ -84,29 +51,27 @@
     </div>
 </script>
 
-<script id="admin" type="text/template">
+<script id="loading-list-template" type="text/x-handlebars-template">
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-2 col-md-10 margin-top">
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-10 margin-top">
-                        <a href="/#admin/food/add" class="btn btn-dark">Add Food</a>
-                        <a href="/#admin/food/list" class="btn btn-dark">List Food</a>
-                    </div>
-                </div>
+            <div id="form" class="col-md-6 col-lg-offset-3">
+                <div class="text-center">Loading Food List</div>
+                <h1>
+                    <i class="fa fa-cog fa-spin"></i>
+                </h1>
             </div>
         </div>
     </div>
 </script>
 
-<script id="food-list" type="text/template">
+<script id="food-list-template" type="text/x-handlebars-template">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 large-margin-top align-right margin-bottom">
-                <a href="/#admin/food/add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Add Food">
+                <a href="/add" id="add-food" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Add Food">
                     <i class="fa fa-plus"></i>
                 </a>
-                <a href="/#logout" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Logout">
+                <a href="/logout" id="logout" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Logout">
                     <i class="fa fa-sign-out"></i>
                 </a>
             </div>
@@ -121,9 +86,9 @@
                     </tr>
                     <% _.each(foods, function(food) { %>
                     <tr>
-                        <td><a href="/#admin/food/edit/<%- food.id %>"><%- food.name %></a></td>
-                        <td><%- food.description %></td>
-                        <td class="text-center"><%- food.allowed_in_moderation %></td>
+                        <td><a href="/edit/{{food.id}}">{{food.name}}</a></td>
+                        <td>{{food.description}}</td>
+                        <td class="text-center"><{{food.allowed_in_moderation}}</td>
                     </tr>
                     <% }); %>
                 </table>
@@ -132,7 +97,7 @@
     </div>
 </script>
 
-<script id="add-food" type="text/template">
+<script id="add-food-template" type="text/x-handlebars-template">
     <div class="container">
         <div class="row">
             <div class="col-md-offset-2 col-md-10 large-margin-top">
@@ -165,7 +130,7 @@
     </div>
 </script>
 
-<script id="edit-food" type="text/template">
+<script id="edit-food-template" type="text/x-handlebars-template">
     <div class="container">
         <div class="row">
             <div class="col-md-offset-2 col-md-10 large-margin-top">
@@ -199,13 +164,10 @@
 
 </script>
 
-<script src="js/libs/jquery.min.js"></script>
-<script src="js/libs/underscrore-min.js"></script>
-<script src="js/libs/backbone-min.js"></script>
-<script src="js/libs/backbone.routefilter.min.js"></script>
-<script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
-<script src="https://cdn.firebase.com/libs/backbonefire/0.5.1/backbonefire.js"></script>
-<script src="js/libs/bootstrap.min.js"></script>
-<script src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../js/admin.js"></script>
 </body>
 </html>
