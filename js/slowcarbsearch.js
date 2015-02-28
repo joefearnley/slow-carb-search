@@ -56,5 +56,5 @@ $(function() {
     //    return false;
     //});
 
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    $('body').tooltip({ selector: '[data-toggle=tooltip]' });
 });
