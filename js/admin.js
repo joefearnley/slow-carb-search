@@ -1,4 +1,13 @@
 (function() {
+
+    Handlebars.registerHelper('each', function(context, options) {
+        var array = '';
+        for(var i = 0, j = context.length; i < j; i++) {
+            array = array + options.fn(context[i]);
+        }
+        return array;
+    });
+
     var Admin = {
         firebaseRef: null,
         firebaseUrl: 'https://slowcarbsearch.firebaseio.com',
@@ -19,16 +28,8 @@
             $.get('https://slowcarbsearch.firebaseio.com/foods.json').done(function(response) {
                 self.foods = response;
                 self.showList();
-                self.bindEvents();
             }).fail(function(response) {
                 console.log('Error fetching foods: ' + response.resposeText);
-            });
-        },
-        bindEvents: function () {
-            var self = this;
-            $('form#login-form').on('submit', function(e) {
-                e.preventDefault();
-                self.login();
             });
         },
         login: function() {
@@ -50,11 +51,12 @@
         showList: function () {
             var self = this;
 
-            // load foods from firebase
             // update html
-            // set click eventsx`   
 
             self.el.html(self.listTemplate.html());
+            // set click events
+
+
 
             //$('#add-food').on('click', function(e) {
             //    e.preventDefault();
