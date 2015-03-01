@@ -1,5 +1,5 @@
 (function() {
-    var Search = {
+    var App = {
         firebaseUrl: 'https://slowcarbsearch.firebaseio.com',
         foods: [],
         init: function () {
@@ -28,12 +28,12 @@
             $('#form').html(html);
         },
         search: function() {
-            var query = this.value;
+            var query = (this.value === undefined) ? $('#query').val() : this.value;
 
             if(query === '') {
                 $('#results').html('');
             } else {
-                var allowed = Search.foods.filter(function(food) {
+                var allowed = App.foods.filter(function(food) {
                     return (query.toLowerCase() == food.name.toLowerCase());
                 });
 
@@ -50,5 +50,5 @@
         }
     };
 
-    Search.init();
+    App.init();
 })();
