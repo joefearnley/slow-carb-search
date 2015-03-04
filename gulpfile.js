@@ -6,7 +6,7 @@ gulp.task('webserver', function() {
         .pipe(webserver({
             host: 'localhost',
             port: '8000',
-            //livereload: false,
+            livereload: true,
             directoryListing: false
         }));
 });

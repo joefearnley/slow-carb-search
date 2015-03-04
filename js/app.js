@@ -17,16 +17,31 @@
         },
         bindEvents: function () {
             var self = this;
+            $('body').tooltip({ selector: '[data-toggle=tooltip]' });
             $('#query').on('keyup', this.search);
             $('form#search-form').on('submit', function (e) {
                 e.preventDefault();
                 self.search();
+            });
+
+            $('#info-button').click(function () {
+                $('#info').slideToggle();
+                var icon = $('#info-button-icon');
+                if(icon.hasClass('fa-info-circle')) {
+                    $('#info-button').addClass('open');
+                    icon.removeClass('fa-info-circle').addClass('fa-close');
+                } else {
+                    $('#info-button').removeClass('open');
+                    icon.removeClass('fa-close').addClass('fa-info-circle');
+                }
             });
         },
         showForm: function () {
             var html = $('#search-form-template').html();
             $('#form').html(html);
         },
+
+
         search: function() {
             var query = (this.value === undefined) ? $('#query').val() : this.value;
 
