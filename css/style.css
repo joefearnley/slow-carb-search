@@ -124,16 +124,20 @@ form.login {
     display: none;
 }
 
+#info-button i {
+    color: grey;
+}
+
 #info-button {
+    background: transparent;
     position: fixed;
     top: 0px;
     left: 0px;
     height: 40px;
     width: 40px;
     border: 0px;
-    background-color: white;
 }
 
-#info-button.open {
-    background-color: #ccc;
+#github-link {
+    color: #000;
 }
