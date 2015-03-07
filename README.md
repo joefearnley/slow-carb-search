@@ -5,7 +5,6 @@ Diet](http://en.wikipedia.org/wiki/Slow-Carb_Diet).
 
 ----
 
-I was interested in creating an application using the [Laravel
-Framework](http://laravel.com/) . This repo isn't intended to be
-installable, just a place to showcase the code I wrote in the process.
+I was interested in creating an application using [Firebase](https://www.firebase.com/) as a backend.
+This repo isn't intended to be installable, just a place to showcase the code I wrote in the process.
  

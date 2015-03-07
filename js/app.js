@@ -18,6 +18,14 @@
         bindEvents: function () {
             var self = this;
             $('body').tooltip({ selector: '[data-toggle=tooltip]' });
+            $('form#search-form').on('keyup', function (e) {
+                e.preventDefault();
+                var query = (this.value === undefined) ? $('#query').val() : this.value;
+                if(query === '') {
+                    $('#results').html('');
+                }
+            });
+
             $('form#search-form').on('submit', function (e) {
                 e.preventDefault();
                 self.search();
@@ -40,8 +48,6 @@
             var html = $('#search-form-template').html();
             $('#form').html(html);
         },
-
-
         search: function() {
             var query = (this.value === undefined) ? $('#query').val() : this.value;
 

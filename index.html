@@ -80,6 +80,9 @@
     {{#if allowed}}
         <span class="allowed">
             <strong><span>{{query}}</span></strong> is allowed on the Slow Carb Diet
+            {{#if allowed_in_moderation}}
+                but only in moderation.
+            {{/if}}
         </span>
     {{else}}
         <span class="not-allowed">
