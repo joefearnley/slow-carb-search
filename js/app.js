@@ -28,7 +28,12 @@ var App = {
 
         $('form#search-form').on('submit', function (e) {
             e.preventDefault();
-            self.search();
+
+            var query = (this.value === undefined) ? $('#query').val() : this.value;
+
+            var html = self.search(query);
+
+            $('#results').html(html);
         });
 
         $('#info-button').click(function () {
@@ -48,11 +53,10 @@ var App = {
         var html = $('#search-form-template').html();
         $('#form').html(html);
     },
-    search: function() {
-        var query = (this.value === undefined) ? $('#query').val() : this.value;
+    search: function(query) {
 
         if(query === '') {
-            $('#results').html('');
+            return '';
         } else {
             var allowed = App.foods.filter(function(food) {
                 return (query.toLowerCase() == food.name.toLowerCase());
@@ -65,7 +69,7 @@ var App = {
                 }
                 var html = $('#results-template').html();
                 var template = Handlebars.compile(html);
-                $('#results').html(template(context));
+                return template(context);
             }
         }
     }

@@ -3,7 +3,12 @@ $(function() {
     App.init();
 });
 
+QUnit.test('we have data', function(assert) {
+    console.log(App.foods.length);    
+    assert.ok(App.foods.length > 0);
+});
 
-QUnit.test('test we have data', function(assert) {
+QUnit.test('Search Test', function(assert) {
+    console.log(App.foods.length);    
     assert.ok(App.foods.length > 0);
 });
