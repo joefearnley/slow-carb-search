@@ -27,18 +27,17 @@ var App = {
         $('form#search-form').on('submit', function (e) {
             e.preventDefault();
             var query = (this.value === undefined) ? $('#query').val() : this.value;
-            var allowed = self.search(query);
+            if(query === '') {
+                return false;
+            }            
 
-            var html = '';
-            if (allowed) {
-                var context = {
-                    query: query,
-                    allowed: allowed
-                }
-                var html = $('#results-template').html();
-                var template = Handlebars.compile(html);
-                html = template(context);
-            }
+            var results = self.search(query);
+            var allowed = (results.length > 0) ? true ? false;
+            var allowed_in_moderation = (results.length > 0) ? results[0].allowed_in_moderation ? false;
+            var context = self.search(query);
+            var html = $('#results-template').html();
+            var template = Handlebars.compile(html);
+            html = template(context);
 
             $('#results').html(html);
         });
@@ -58,18 +57,24 @@ var App = {
         });
     },
     showForm: function () {
-        var html = $('#search-form-template').html();
-        $('#form').html(html);
+        $('#form').html($('#search-form-template').html());
     },
     search: function(query) {
-        if(query === '') {
-            return false;
-        }
-
-        var allowed = App.foods.filter(function(food) {
+        var results = App.foods.filter(function(food) {
             return (query.toLowerCase() == food.name.toLowerCase());
         });
+        var context = {
+            query: query,
+            allowed: false,
+            allowed_in_moderation: false
+        };
 
-        return allowed;
+        if(results.length > 0) {
+            context.query = results[0].name;
+            context.allowed = true;
+            context.allowed_in_moderation = results[0].allowed_in_moderation;
+        }
+
+        return context;
     }
 };
