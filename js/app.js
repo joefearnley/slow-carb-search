@@ -28,9 +28,9 @@ var App = {
     },
     handleFormSubmission: function (e) {
         e.preventDefault();
-        
         var self = App;
         var query = (this.value === undefined) ? $('#query').val() : this.value;
+
         if(query === '') {
             return false;
         }
@@ -56,17 +56,18 @@ var App = {
         $('#form').html($('#search-form-template').html());
     },
     search: function(query) {
-        var results = App.foods.filter(function(food) {
-            return (query.toLowerCase() == food.name.toLowerCase());
-        });
         var context = {
-            query: query,
+            name: query,
             allowed: false,
             allowed_in_moderation: false
         };
 
+        var results = App.foods.filter(function(food) {
+            return (query.toLowerCase() == food.name.toLowerCase());
+        });
+
         if(results.length > 0) {
-            context.query = results[0].name;
+            context.name = results[0].name;
             context.allowed = true;
             context.allowed_in_moderation = results[0].allowed_in_moderation;
         }

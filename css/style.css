@@ -76,10 +76,10 @@ input.input-food:-moz-placeholder::before  {
 }
 
 .results {
+    text-align: center;
     margin-left: 10px;
     margin-top: 50px;
     font-size: 30px;
-    text-align: left;
     color: #337ab7;
 }
 

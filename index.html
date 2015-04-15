@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
+                <div class="col-md-12">
                     <div id="results" class="results">
                     </div>
                 </div>
@@ -79,14 +79,14 @@
 <script id="results-template" type="text/x-handlebars-template">
     {{#if allowed}}
         <span class="allowed">
-            <strong><span>{{query}}</span></strong> is allowed on the Slow Carb Diet
+            <strong><span>{{name}}</span></strong> is allowed on the Slow Carb Diet
             {{#if allowed_in_moderation}}
                 but only in moderation.
             {{/if}}
         </span>
     {{else}}
         <span class="not-allowed">
-            <strong><span>{{query}}</span></strong> is not allowed on the Slow Carb Diet
+            <strong><span>{{name}}</span></strong> is not allowed on the Slow Carb Diet
         </span>
     {{/if}}
 </script>
