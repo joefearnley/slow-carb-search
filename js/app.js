@@ -1,11 +1,12 @@
 var App = {
     foods: [],
+    dataUrl: 'http://joefearnley.com/slow-carb-search/data/foods.json',
     init: function () {
         this.fetchFoods();
     },
     fetchFoods: function() {
         var self = this;
-        $.get('/data/foods.json').done(function(response) {
+        $.get(self.dataUrl).done(function(response) {
             self.foods = response;
             self.showForm();
             self.bindEvents();
