@@ -14,35 +14,31 @@ var App = {
         });
     },
     bindEvents: function () {
-        var self = this;
         $('body').tooltip({ selector: '[data-toggle=tooltip]' });
-        $('form#search-form').on('keyup', function (e) {
-            e.preventDefault();
-            var query = (this.value === undefined) ? $('#query').val() : this.value;
-            if(query === '') {
-                $('#results').html('');
-            }
-        });
-
-        $('form#search-form').on('submit', function (e) {
-            e.preventDefault();
-            var query = (this.value === undefined) ? $('#query').val() : this.value;
-            if(query === '') {
-                return false;
-            }            
-
-            var results = self.search(query);
-            var allowed = (results.length > 0) ? true ? false;
-            var allowed_in_moderation = (results.length > 0) ? results[0].allowed_in_moderation ? false;
-            var context = self.search(query);
-            var html = $('#results-template').html();
-            var template = Handlebars.compile(html);
-            html = template(context);
-
-            $('#results').html(html);
-        });
-
+        $('form#search-form').on('keyup', this.handleFormKeyUp);
+        $('form#search-form').on('submit', this.handleFormSubmission);
         $('#info-button').click(this.toggleInfoButton);
+    },
+    handleFormKeyUp: function (e) {
+        e.preventDefault();
+        var query = (this.value === undefined) ? $('#query').val() : this.value;
+        if(query === '') {
+            $('#results').html('');
+        }
+    },
+    handleFormSubmission: function (e) {
+        e.preventDefault();
+        
+        var self = App;
+        var query = (this.value === undefined) ? $('#query').val() : this.value;
+        if(query === '') {
+            return false;
+        }
+
+        var context = self.search(query);
+        var html = $('#results-template').html();
+        var template = Handlebars.compile(html);
+        $('#results').html(template(context));
     },
     toggleInfoButton: function () {
         $('#info').slideToggle(function () {
