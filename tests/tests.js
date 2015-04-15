@@ -31,6 +31,14 @@ QUnit.test('Test search found something Case does not matter', function(assert) 
     assert.deepEqual(context.allowed_in_moderation, false);
 });
 
+QUnit.test('Test search results only in moderation', function(assert) {
+    var context = App.search('Beets');
+
+    assert.deepEqual(context.name, 'Beets');
+    assert.deepEqual(context.allowed, true);
+    assert.deepEqual(context.allowed_in_moderation, true);
+});
+
 QUnit.test('Test search did not find something', function(assert) {
     var context = App.search('Pizza');
 
